@@ -6,7 +6,7 @@ node_modules
 bower_components
 tools/gulp-tasks/cldr/cldr-data/
 #apikey
-environment.ts
+#environment.ts
 #packages-lock.json
 # Include when developing application packages.
 pubspec.lock
