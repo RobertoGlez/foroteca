@@ -1,0 +1,63 @@
+.contenedor {
+    width: 92.5%;
+    margin: auto;
+}
+
+.articulos {
+    margin: 15px;
+}
+
+.margin_edit {
+    margin-left: 20px;
+    margin-right: 0px !important;
+}
+
+.col-4 {
+    padding: 0px;
+}
+
+.col {
+    padding: 0px;
+}
+
+.custom-width1 {
+    width: 70%;
+    height: 50px;
+}
+
+.custom-width2 {
+    width: 20%;
+    height: 50px;
+}
+
+.custom-width3 {
+    display: inline-block;
+    padding: 0% !important;
+}
+
+.custom-width3>h1 {
+    margin-left: 15px;
+}
+
+.border_edit {
+    border-radius: 0%;
+}
+
+.fa-grip-vertical {
+    font-size: 45px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.fa-search {
+    font-size: 25px;
+}
+
+.sombras {
+    box-shadow: 5px 2px 20px #666;
+}
+
+input::placeholder {
+    font-size: 23px;
+    opacity: 0.3;
+}
