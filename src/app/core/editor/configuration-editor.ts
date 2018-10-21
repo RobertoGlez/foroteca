@@ -1,4 +1,4 @@
-
+import * as Quill from 'quill';
 
 export const OPTIONS =  [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -19,5 +19,13 @@ export const OPTIONS =  [
   
     ['image','code-block','formula']                                         // remove formatting button
   ];
+
+
+
+// Add fonts to whitelist
+export var FONTS = Quill.import('formats/font');
+// We do not add Aref Ruqaa since it is the default
+FONTS.whitelist = ['mirza', 'roboto'];
+Quill.register(FONTS, true);
 
 

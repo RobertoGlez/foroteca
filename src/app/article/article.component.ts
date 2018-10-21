@@ -9,6 +9,7 @@ import { OPTIONS } from '../core/editor/configuration-editor';
 })
 export class ArticleComponent implements OnInit {
   public contenedor:HTMLElement;
+  public salida:HTMLElement;
   public editor;
   public options = {
     modules: {
@@ -21,6 +22,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     this.contenedor  = document.getElementById('editor');
+    this.salida = document.getElementById('salida')
     console.log(this.contenedor);
     this.editor = new Quill(this.contenedor, this.options);
   }
@@ -28,6 +30,8 @@ export class ArticleComponent implements OnInit {
   enviar(){
     console.log("Enviando");
     console.log("Data:", this.editor.getContents());
+    console.log("Child",this.editor.container.firstChild)
+    this.salida.innerHTML = this.editor.root.innerHTML;
   }
 
 }
