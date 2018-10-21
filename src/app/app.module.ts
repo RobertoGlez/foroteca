@@ -10,6 +10,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 
+//Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+//Enviroment
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +27,9 @@ import { SigninComponent } from './signin/signin.component';
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING
+    APP_ROUTING,
+    AngularFireModule.initializeApp(environment.firebase), //For firebase config
+    AngularFireDatabaseModule, // for database
   ],
   providers: [],
   bootstrap: [AppComponent]
