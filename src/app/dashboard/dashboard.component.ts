@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore'
+// import { AngularFirestore } from '@angular/fire/firestore'
 import { Observable } from 'rxjs';
+import * as Quill from 'quill';
+import { OPTIONS } from '../core/editor/configuration-editor';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,16 +10,17 @@ import { Observable } from 'rxjs';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  public users:Observable<any>;
 
-  constructor(db:AngularFirestore) {
-    this.users = db.collection('usuarios').valueChanges();
-    this.users.subscribe((u)=>{
-      console.log("Usuario ->",u);
-    });
+
+  constructor() {
+
+   
   }
+
 
   ngOnInit() {
+    
   }
 
+  
 }
