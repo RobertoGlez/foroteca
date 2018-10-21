@@ -1,68 +1,78 @@
 <div class="contenedor">
     <div class="row">
-        <div class="col-6">
+        <div class="col-5">
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2 margin_edit border_edit custom-width1" type="text" placeholder="¿Qué quieres saber?">
-                <button class="btn bg-ft-primary my-2 my-sm-0 border_edit custom-width2" type="button"> <i class="fas fa-search"></i></button>
+                <button class="btn bg-ft-primary my-2 my-sm-0 border_edit custom-width2 ctm_padding" type="button"> 
+                    <i class="fas fa-search"></i>
+                </button>
             </form>
         </div>
-        <div class="col-2 d-flex bg-white custom-width3">
-            <i class="fas fa-grip-vertical"></i>
-            <h1>Filtros</h1>
+        <div class="d-flex bg-white">
+            <button class="btn my-2 my-sm-0 d-flex ctm_heigth" type="button"> 
+                    <i class="fas fa-sliders-h"></i>                
+                    <h1 class="margin_edit2 ctm_heigth2">Filtros</h1>
+            </button>
         </div>
     </div>
+    <br>
+    <hr>
     <div class="row">
         <div class="col">
             <h1>Recientes</h1>
         </div>
-        <div class="col-4 margin_edit">
+        <div class="col-3 margin_edit">
             <h1>Usuarios</h1>
         </div>
     </div>
-    <div class="row ">
+    <div class="row">
         <!-- ARTICULOS RECIENTES -->
-        <div class="col bg-white">
-            <div class="row bg-ft-primary articulos">
+        <div class="col-8 bg-white">
+            <div class="row bg-white usuarios sombras">
                 <div class="col">
-                    <h1 class="sombras">Articulo 1</h1>
-                </div>
-            </div>
-            <div class="row bg-ft-primary articulos">
-                <div class="col">
-                    <h1 class="sombras">Articulo 2</h1>
-                </div>
-            </div>
-            <div class="row bg-ft-primary articulos">
-                <div class="col">
-                    <h1 class="sombras">Articulo 3</h1>
+                    <div class="row ctm_height">
+                        <button class="btn ctm_btn bg-white d-flex" type="button"> 
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+                    <div class="row articulos">
+                        <div class="col-2">
+                            <img class="ctm_img" src="assets/img/ex1.jpg">
+                        </div>
+                        <div class="col ctm_text">
+                            <div class="row articulos">
+                                <h3>Como mejorar las capacidades de aprendizaje</h3>
+                            </div>
+                            <div class="row articulos">
+                                <p>TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                            </div>
+                            <div class="row articulos">
+                                <div class="col">
+                                    <p class="ctm_text2">Prof. Margarita Mendoza Cruz</p>
+                                </div>
+                                <div class="col">
+                                    <p class="ctm_text3">Hace 20 minutos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row bg-ft-primary articulos ctm_height3">
+                        <i class="fas fa-tag"></i>
+                        <p>Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-1"></div>
         <!-- USUARIOS -->
-        <div class="col-4 bg-white margin_edit">
-            <div class="row bg-primary articulos">
-                <div class="col">
-                    <h1>Usuario 1</h1>
+        <div class="col-3 bg-white">
+            <div class="row bg-primary usuarios">
+                <div class="col-4">
+                    <img class="ctm_img2" src="assets/img/ex1.jpg" alt="">
                 </div>
-            </div>
-            <div class="row bg-primary articulos">
                 <div class="col">
-                    <h1>Usuario 2</h1>
-                </div>
-            </div>
-            <div class="row bg-primary articulos">
-                <div class="col">
-                    <h1>Usuario 3</h1>
-                </div>
-            </div>
-            <div class="row bg-primary articulos">
-                <div class="col">
-                    <h1>Usuario 4</h1>
-                </div>
-            </div>
-            <div class="row bg-primary articulos">
-                <div class="col">
-                    <h1>Usuario 5</h1>
+                    <h4 class="ctm_text4">Ing.Fulanito Pérez</h4>
                 </div>
             </div>
         </div>
