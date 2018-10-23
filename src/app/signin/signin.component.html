@@ -1,3 +1,214 @@
-<p>
-  signin works!
-</p>
+<div class="conteiner">
+  <h2 class="text-center">Registrate</h2>
+  <h6 class="text-center text-muted">Rellena el formulario con tus datos</h6>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 m-auto" >
+            <form  #usuario="ngForm" (ngSubmit)="registrarUsuario(usuario)" validate>
+                <div class="container">
+                <div class="row">
+                    <!-- <div class="form-group col-12">
+                        <label for="">Matricula *</label>
+                        <input type="text" class="form-control" id="matricula" placeholder="Matricula" (focusout)="revisarMatricula()">
+                    </div> -->
+                    <div class="col-md-6 col-sm-12">
+                        <label for="">Nombre</label>
+                        <input type="text" 
+                        class="form-control"  
+                        placeholder="Nombre" 
+                        required 
+                        name="nombre"
+                        ngModel>
+                    </div>
+
+                    <div class=" col-md-6 col-sm-12">
+                        <label for="">Apellidos</label>
+                        <input type="text" 
+                        class="form-control"  
+                        placeholder="Apellidos" 
+                        required 
+                        name="apellidos"
+                        ngModel>
+                    </div>
+                    <div class="col-12">
+                        <label for="">Correo Electronico</label>
+                        <input type="email" 
+                        class="form-control" 
+                        placeholder="Correo Electronico" 
+                        required 
+                        name="email"
+                        ngModel 
+                        >
+                    </div>
+                    <div class=" col-md-6 col-sm-12">
+                        <label for="">Contraseña</label>
+                        <input type="password" 
+                        class="form-control"  
+                        placeholder="Contraseña" 
+                        name="password"
+                        ngModel>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <label for="">Repetir contraseña contraseña</label>
+                        <input type="password" 
+                        class="form-control"  
+                        placeholder="Repetir contraseña" 
+                        name="password2"
+                        ngModel>
+                    </div>
+                </div>
+                <hr>
+                <div class=" row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                <input type="radio" 
+                                name="rol" 
+                                required 
+                                checked
+                                ngModel
+                                value="estudiante"
+                                (click)="changeRol(1)">
+                                </div>
+                            </div>
+                            <label  class="form-control" >Estudiante</label>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                <input type="radio" 
+                                name="rol" 
+                                required  
+                                ngModel
+                                value="maestro" 
+                                (click)="changeRol(0)">
+                                </div>
+                            </div>
+                            <label  class="form-control" >Maestro</label>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                            <label class="input-group-text" for="">Division</label>
+                            </div>
+                            <select class="custom-select" 
+                            id="division" 
+                            name="division" 
+                            ngModel
+                            >
+                                <option value="" selected >Seleccione su división...</option>
+                                <option value="" >Turismo y hoteleria</option>
+                                <option value="" >Tecnologias de la informacion</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Contenedor estudiante -->
+                
+                <div class="row animated fadeIn" *ngIf="rol.estudiante">
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="">Carrera</label>
+                            </div>
+                            <select class="custom-select" 
+                            name="carrera" 
+                            ngModel
+                            >
+                                <option value="" selected >Seleccione su carrera...</option>
+                                <option value="" >Turismo y hoteleria</option>
+                                <option value="" >Tecnologias de la informacion</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="">Cuatrimestre</label>
+                            </div>
+                            <select class="custom-select" 
+                            id="cuatrimestre" 
+                            name="cuatrimestre" 
+                            ngModel
+                            >   
+                                <!-- <option value="" ngCheked> Seleccione su cuatrimestre </option> -->
+                                <option value="1">Primer Cuatrimestre</option>
+                                <option value="2" >Segundo Cuatrimestre</option>
+                                <option value="3" >Tercer Cuatrimestre</option>
+                                <option value="4" >Cuarto Cuatrimestre</option>
+                                <option value="5" >Quinto Cuatrimestre</option>
+                                <option value="6" >Sexto Cuatrimestre</option>
+                            </select> 
+                        </div>
+                    </div>
+                </div>
+
+                
+                    
+        
+            <!-- / Contenedor estudiantes -->
+            <!-- Contenedor maestros -->
+        
+                
+                <div class="row animated fadeIn" *ngIf="rol.maestro">
+                    <div class="col-12">
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                            <label class="input-group-text" for="">Grado de estudios</label>
+                            </div>
+                            <select class="custom-select" 
+                            id="grado" 
+                            name="grado" 
+                            ngModel
+                            required>
+                                <option selected >Seleccione su grado...</option>
+                                <option value="" >Licenciatura</option>
+                                <option value="" >Ingenieria</option>
+                                <option value="">Maestria</option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="col-12">
+                    <label for="">Carrera</label>
+                    <input type="text" 
+                    class="form-control" 
+                    placeholder="Escriba el título que posee"
+                    name="titulo"
+                    ngModel
+                    required>
+                    </div>
+                </div>
+            
+            <!-- /Contenedor maestros -->
+                <div class="row my-3">
+                        <div class="col m-auto ">
+                                <div class="form-check">
+                                <input class="form-check-input" 
+                                type="checkbox" 
+                                id="terminos"
+                                ngModel
+                                name="terminos">
+                                <label class="form-check-label" for="gridCheck">
+                                    Acepto terminos y condiciones
+                                </label>
+                                </div>
+                        </div>
+                        
+                </div>
+                <button type="submit" class="btn btn-primary text-center mb-3">Registrarte</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>
+</div>     

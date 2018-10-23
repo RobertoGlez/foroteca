@@ -5,6 +5,7 @@ import { SigninComponent } from './signin/signin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ThemeComponent } from './theme/theme.component'
 import { ArticleComponent } from './article/article.component';
+import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
 const APP_ROUTES : Routes = [
     {path:'inicio', component:HomeComponent},
@@ -12,8 +13,11 @@ const APP_ROUTES : Routes = [
     {path:'registrarse',component:SigninComponent},
     {path:'mi-panel',component:DashboardComponent},
     {path:'tema',component:ThemeComponent},
-    {path:'articulo',component:ArticleComponent},
-    {path:'**', pathMatch:'full',redirectTo:'/inicio'}
+    {path:'nuevo-articulo',component:ArticleComponent},
+    {path:'no-encontrado',component:NopagefoundComponent},
+    {path:'',pathMatch:'full',redirectTo:'/inicio'},
+    {path:'**', redirectTo:'/no-encontrado'}
+    // {path:'**', pathMatch:'full',redirectTo:'/inicio'}
 
 ];
 
