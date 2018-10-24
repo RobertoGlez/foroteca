@@ -9,7 +9,7 @@
                 <div class="row">
                     <!-- <div class="form-group col-12">
                         <label for="">Matricula *</label>
-                        <input type="text" class="form-control" id="matricula" placeholder="Matricula" (focusout)="revisarMatricula()">
+                        <input type="text" class="form-control" id="matricula" placeholder="Matricula" ngModel>
                     </div> -->
                     <div class="col-md-6 col-sm-12">
                         <label for="">Nombre</label>
@@ -18,17 +18,32 @@
                         placeholder="Nombre" 
                         required 
                         name="nombre"
+                        #nombre="ngModel"
                         ngModel>
+                        <!-- Alerts -->
+                        <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="">
+                                <div [hidden]="!nombre.errors.required">
+                                  <p class="text-danger">¡Necesitas un nombre!</p>
+                                </div>
+                        </div>
                     </div>
+           
 
-                    <div class=" col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <label for="">Apellidos</label>
                         <input type="text" 
                         class="form-control"  
                         placeholder="Apellidos" 
                         required 
                         name="apellidos"
-                        ngModel>
+                        ngModel
+                        #apellidos="ngModel">
+                        <!-- alerts -->
+                        <div *ngIf="apellidos.errors && (apellidos.dirty || apellidos.touched)" class="">
+                                <div [hidden]="!apellidos.errors.required">
+                                  <p class="text-danger">¿No tienes papas? :c </p>
+                                </div>
+                        </div>
                     </div>
                     <div class="col-12">
                         <label for="">Correo Electronico</label>
@@ -38,7 +53,17 @@
                         required 
                         name="email"
                         ngModel 
+                        #email="ngModel"
                         >
+                        <!-- alert -->
+                        <div *ngIf="email.errors && (email.dirty || email.touched)" class="">
+                                <div [hidden]="!email.errors.required">
+                                    <p class="text-danger">Necesitas un email, estamos en {{ year }}</p>
+                                </div>
+                                <div *ngIf="">
+                                    <p class="text-danger">Ya existe este email, ¿una cuenta fake eh?</p>
+                                </div>
+                        </div>
                     </div>
                     <div class=" col-md-6 col-sm-12">
                         <label for="">Contraseña</label>
@@ -46,28 +71,57 @@
                         class="form-control"  
                         placeholder="Contraseña" 
                         name="password"
+                        #passOne="ngModel"
+                        required
                         ngModel>
+                        <div *ngIf="passOne.errors && (passOne.dirty || passOne.touched)" class="">
+                                <div [hidden]="!passOne.errors.required">
+                                    <p class="text-danger position-absolute">Te falto este campo</p>
+                                    <br>
+                                </div>
+                        </div>
                     </div>
+                    
                     <div class="col-md-6 col-sm-12">
                         <label for="">Repetir contraseña contraseña</label>
                         <input type="password" 
                         class="form-control"  
                         placeholder="Repetir contraseña" 
                         name="password2"
+                        #passTwo="ngModel"
+                        required
                         ngModel>
+                        <div *ngIf="passTwo.errors && (passTwo.dirty || passTwo.touched)" class="">
+                           
+                                <div [hidden]="!passTwo.errors.required">
+                                    <p class="text-danger">Te falto este campo</p>
+                                    
+                                </div>
+                                
+                        </div>
                     </div>
+                    <div class="col-12 text-center">
+                        <br *ngIf="passOne.value == passTwo.value">
+                        <span class="text-danger" [hidden]="passOne.value == passTwo.value">
+                            Las contraseñas necesitan ser iguales
+                        </span>
+                    </div> 
+                   
                 </div>
                 <hr>
                 <div class=" row">
+                <div class="col-12 text-center text-muted">
+                    <p>Seleccione un rol</p>
+                </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                 <input type="radio" 
-                                name="rol" 
-                                required 
-                                checked
+                                name="rol"
+                                id="estudiante" 
+                                required
                                 ngModel
                                 value="estudiante"
                                 (click)="changeRol(1)">
@@ -97,16 +151,16 @@
                 <div class="col-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                            <label class="input-group-text" for="">Division</label>
+                            <label class="input-group-text" for="">Division de </label>
                             </div>
                             <select class="custom-select" 
                             id="division" 
                             name="division" 
                             ngModel
+                            required
                             >
                                 <option value="" selected >Seleccione su división...</option>
-                                <option value="" >Turismo y hoteleria</option>
-                                <option value="" >Tecnologias de la informacion</option>
+                                <option value="{{ division.nombre }}" *ngFor="let division of u; let i = index" (click)="changeDivision(i)">{{ division.nombre }}</option>
                             </select> 
                         </div>
                     </div>
@@ -124,10 +178,12 @@
                             <select class="custom-select" 
                             name="carrera" 
                             ngModel
+                            required
                             >
                                 <option value="" selected >Seleccione su carrera...</option>
-                                <option value="" >Turismo y hoteleria</option>
-                                <option value="" >Tecnologias de la informacion</option>
+                                <option value="{{ carrera | json}}" *ngFor="let carrera of u[divisionIndex].carreras">
+                                    {{ carrera.abr }} en {{ carrera.label}} 
+                                </option>
                             </select> 
                         </div>
                     </div>
@@ -139,7 +195,8 @@
                             <select class="custom-select" 
                             id="cuatrimestre" 
                             name="cuatrimestre" 
-                            ngModel
+                            ngModel="1"
+                            required
                             >   
                                 <!-- <option value="" ngCheked> Seleccione su cuatrimestre </option> -->
                                 <option value="1">Primer Cuatrimestre</option>
@@ -171,10 +228,9 @@
                             name="grado" 
                             ngModel
                             required>
-                                <option selected >Seleccione su grado...</option>
-                                <option value="" >Licenciatura</option>
-                                <option value="" >Ingenieria</option>
-                                <option value="">Maestria</option>
+                                <option value="" selected >Seleccione su grado...</option>
+                                <option value="{{ grado | json }}" *ngFor="let grado of g">{{ grado.titulo}}</option>
+                                
                             </select> 
                         </div>
                     </div>
@@ -182,15 +238,25 @@
                     <label for="">Carrera</label>
                     <input type="text" 
                     class="form-control" 
-                    placeholder="Escriba el título que posee"
+                    placeholder="Escriba el título que poseé"
                     name="titulo"
                     ngModel
+                    #titulo="ngModel"
                     required>
+                        <div *ngIf="titulo.errors && (titulo.dirty || titulo.touched)" class="">
+                            
+                                <div [hidden]="!titulo.errors.required">
+                                    <p class="text-danger">¿de que se tituló?</p>
+                                    
+                                </div>
+                                
+                        </div>
                     </div>
+                    
                 </div>
-            
+                <br>
             <!-- /Contenedor maestros -->
-                <div class="row my-3">
+                <!-- <div class="row my-3">
                         <div class="col m-auto ">
                                 <div class="form-check">
                                 <input class="form-check-input" 
@@ -204,8 +270,23 @@
                                 </div>
                         </div>
                         
-                </div>
-                <button type="submit" class="btn btn-primary text-center mb-3">Registrarte</button>
+                </div> -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100 m-auto " [disabled]="!usuario.valid">Registrarte</button>
+                        </div> 
+                        
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                                <p class="text-muted">
+                                        <small>
+                                                Foroteca &copy; | derechos reservados
+                                        </small>
+                                </p>
+                        </div>
+                    </div>
                 </div>
             </form> 
         </div>
