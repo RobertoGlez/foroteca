@@ -1,28 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
 @font-face {
     font-family: foroteca;
     src: url(assets/fonts/Familiar_Pro-Bold.otf);
+}
+
+.contenedor {
+    width: 92.5%;
+    margin: auto;
 }
 
 .foroteca {
     font-family: foroteca;
 }
 
-.foroteca-primary{
+.foroteca-primary {
     color: #00ad92;
 }
-.foroteca-secondary{
+
+.foroteca-secondary {
     color: #1e1e1e;
 }
 
-.bg-ft-primary{
+.bg-ft-primary {
     background-color: #00ad92;
-    color:white;
+    color: white;
 }
-.bg-ft-dark{
- background-color: #007f6c;
- color: white;
+
+.bg-ft-dark {
+    background-color: #007f6c;
+    color: white;
 }
-.bg-ft-smoke{
+
+.bg-ft-smoke {
     background-color: whitesmoke;
 }
