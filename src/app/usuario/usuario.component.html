@@ -1,3 +1,134 @@
-<p>
-  usuario works!
-</p>
+<div class="container-12 bg-ft-smoke">
+    <div class="row ctm-p-m">
+        <div class="col ctm-p-m ctm-img-bg">
+            <div class="row ctm-p-m">
+                <div class="col-12 ctm-p-m d-flex justify-content-center">
+                    <div class="row ctm-mrg">
+                        <div class="col-12 justify-content-center d-flex">
+                            <img class="ctm-img-us" src="assets/img/ex1.jpg" alt="" width="100px" height="100px">
+                        </div>
+                        <div class="col-12">
+                            <h1 class="text-white text-center">David Montores Escalante</h1>
+                        </div>
+                        <div class="col-12">
+                            <h3 class="text-white text-center">Estudiante</h3>
+                        </div>
+                        <div class="col-12 mt-5 justify-content-center d-flex">
+                            <button class="btn"><i class="fas fa-edit mr-2"></i>Editar Perfil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="contenedor">
+        <div class="row">
+            <div class="col-3">
+                <div class="row">
+                    <div class="col bg-white">
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                <h4 class="text-center">Biografía</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                <h6 class="text-justify">Soy David Montores, soy estudiante de la Universidad y me gusta desarrollar aplicaciones web. Soy David Montores, soy estudiante de la Universidad y me gusta desarrollar aplicaciones web.</h6>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Se unió</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="text-right text-justify text-muted">Marzo del 2018</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">División</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="text-right text-justify text-muted">Técnologias de la Información y Comunicación</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Carrera</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="text-right text-justify text-muted">Ingeniería en Técnologias de la Información</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                <button class="btn"><i class="fas fa-edit mr-2"></i>Editar Bio</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 ml-5 bg-white">
+                <!-- ---------BUSCADOR--------- -->
+                <div class="row mt-5">
+                    <div class="col-10">
+                        <form class="form-inline my-2 my-lg-0 ml-3">
+                            <input class="form-control border_edit custom-width1" type="text" placeholder="¿Qué quieres aprender de este usuario?">
+                            <button class="btn bg-ft-primary my-2 my-sm-0 border_edit custom-width2 ctm_padding" type="button"> 
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-1 ml-5 d-flex justify-content-end">
+                        <button class="btn ctm_btn my-2 my-sm-0 d-flex" type="button" data-toggle="tooltip" data-placement="right" title="Filtros"> 
+                                <i class="fas fa-sliders-h"></i>                
+                        </button>
+                    </div>
+                </div>
+                <!-- ---------ARTICULOS--------- -->
+                <div class="row bg-white mt-4 ctm_margin3 sombras" *ngFor="let articulo of articulos">
+                    <div class="col">
+                        <!-- <div class="row d-flex justify-content-end z-index ctm_margin">
+                            <button class="btn">AYUDA!!!</button>
+        
+                        </div> -->
+                        <div class="row mt-2 pb-3 pl-3 pr-3">
+
+                            <div class="col-xl-2 col-sm-2">
+                                <img class="ctm_img ml-2" src="assets/img/ex1.jpg">
+                            </div>
+                            <div class="col-xl-9 col-sm-8 ctm_text">
+                                <div class="row">
+                                    <h3>Como mejorar las capacidades de aprendizaje</h3>
+                                </div>
+                                <div class="row">
+                                    <p>TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="ctm_text2">Prof. Margarita Mendoza Cruz</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="ctm_text3">Hace 20 minutos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-sm-1">
+                                <button class="btn ctm_btn bg-white" type="button"> 
+                                            <i class="fas fa-angle-down"></i>
+                                    </button>
+                            </div>
+                        </div>
+                        <div class="row bg-ft-primary ctm_margin ctm_height3">
+                            <i class="fas fa-tag"></i>
+                            <p class="ctm_text4">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
