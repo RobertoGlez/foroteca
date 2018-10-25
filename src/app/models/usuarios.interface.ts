@@ -1,12 +1,17 @@
 export interface Usuario{
-
-}
-
-export interface uRegistro{
+    // picture:string
+    uid?:string;
     nombre:string;
     apellidos:string;
     email:string;
-    password:string;
+    // password:string;
     tipo:number; //0 maestro, 1 usuario
-    division;
+    division:string;
+    //if alumno
+    carrera?:string;
+    cuatrimestre?:string;
+    //if maestro
+    grado?:string;
+    titulo?:string;
 }
+
