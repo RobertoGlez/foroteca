@@ -1,0 +1,18 @@
+.ctm-img-bg {
+    background-image: url('../../assets/img/usuario-wallpaper.jpg');
+    background-size: cover;
+    height: 500px;
+}
+
+.ctm-mrg {
+    margin-top: 100px;
+}
+
+.ctm-img-us {
+    width: 200px;
+    height: 200px;
+    border-radius: 150px;
+    border-width: 5px;
+    border-color: white;
+    border-style: solid;
+}

@@ -64,6 +64,42 @@
                             </div>
                         </div>
                         <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Sexo</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="text-right text-justify text-muted">Hombre</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Edad</h6>
+                            </div>
+                            <div class="col-8">
+                                <p class="text-right text-justify text-muted">21 años</p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Facebook</h6>
+                            </div>
+                            <div class="col-8">
+                                <a class="ctm-a" href="#">
+                                    <p class="text-right text-justify text-muted"><i class="fab fa-facebook"></i> /David Montores</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
+                            <div class="col-4">
+                                <h6 class="m-0">Twitter</h6>
+                            </div>
+                            <div class="col-8">
+                                <a class="ctm-a" href="#">
+                                    <p class="text-right text-justify text-muted"><i class="fab fa-twitter"></i> /David Montores</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row mt-2 mb-2">
                             <div class="col">
                                 <button class="btn"><i class="fas fa-edit mr-2"></i>Editar Bio</button>
                             </div>
@@ -73,58 +109,80 @@
             </div>
             <div class="col-8 ml-5 bg-white">
                 <!-- ---------BUSCADOR--------- -->
-                <div class="row mt-5">
-                    <div class="col-10">
-                        <form class="form-inline my-2 my-lg-0 ml-3">
-                            <input class="form-control border_edit custom-width1" type="text" placeholder="¿Qué quieres aprender de este usuario?">
-                            <button class="btn bg-ft-primary my-2 my-sm-0 border_edit custom-width2 ctm_padding" type="button"> 
-                                <i class="fas fa-search"></i>
-                            </button>
+                <br>
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <form class="form-inline">
+                            <input class="w-75 form-control ctm-border" type="text" placeholder="¿Qué quieres aprender de David?">
+                            <button class="w-25 btn bg-ft-primary ctm-border" type="button"> 
+                                    <i class="fas fa-search"></i>
+                                </button>
                         </form>
                     </div>
-                    <div class="col-1 ml-5 d-flex justify-content-end">
-                        <button class="btn ctm_btn my-2 my-sm-0 d-flex" type="button" data-toggle="tooltip" data-placement="right" title="Filtros"> 
-                                <i class="fas fa-sliders-h"></i>                
-                        </button>
+                    <div class="col-1 d-flex">
+                        <button class="btn d-flex" type="button"> 
+                                    <i class="ml-2 mr-2 fas fa-sliders-h"></i>                
+                            </button>
                     </div>
                 </div>
+                <br>
+                <hr>
                 <!-- ---------ARTICULOS--------- -->
-                <div class="row bg-white mt-4 ctm_margin3 sombras" *ngFor="let articulo of articulos">
+                <div class="row bg-white ml-2 mr-2 mt-4 sombras" *ngFor="let articulo of articulos">
                     <div class="col">
-                        <!-- <div class="row d-flex justify-content-end z-index ctm_margin">
-                            <button class="btn">AYUDA!!!</button>
-        
-                        </div> -->
-                        <div class="row mt-2 pb-3 pl-3 pr-3">
-
-                            <div class="col-xl-2 col-sm-2">
-                                <img class="ctm_img ml-2" src="assets/img/ex1.jpg">
+                        <div class="row mt-2">
+                            <div class="col-2">
+                                <a class="ctm-a" href="#">
+                                    <img class="ctm-img mt-4" src="assets/img/ex1.jpg">
+                                </a>
                             </div>
-                            <div class="col-xl-9 col-sm-8 ctm_text">
-                                <div class="row">
-                                    <h3>Como mejorar las capacidades de aprendizaje</h3>
+                            <div class="col-9">
+                                <div class="row justify-content-center">
+                                    <a class="ctm-a" href="#">
+                                        <h3>Mejorar el aprendizaje</h3>
+                                    </a>
                                 </div>
                                 <div class="row">
-                                    <p>TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                    <a class="ctm-a" href="#">
+                                        <p class="foroteca-primary">TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                    </a>
                                 </div>
                                 <div class="row">
-                                    <div class="col">
-                                        <p class="ctm_text2">Prof. Margarita Mendoza Cruz</p>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <a class="ctm-a" href="">
+                                                <p class="text-muted">Prof. Margarita Mendoza Cruz</p>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <p class="ctm_text3">Hace 20 minutos</p>
+                                    <div class="col-6">
+                                        <div class="row justify-content-end">
+                                            <a class="ctm-a" href="">
+                                                <p class="text-muted">Hace 20 minutos</p>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-1 col-sm-1">
-                                <button class="btn ctm_btn bg-white" type="button"> 
-                                            <i class="fas fa-angle-down"></i>
+                            <div class="col-1">
+                                <button class="btn bg-white" type="button"> 
+                                        <i class="foroteca-primary fas fa-angle-down"></i>
                                     </button>
                             </div>
                         </div>
-                        <div class="row bg-ft-primary ctm_margin ctm_height3">
-                            <i class="fas fa-tag"></i>
-                            <p class="ctm_text4">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                        <div class="row">
+                            <div class="col bg-ft-primary">
+                                <div class="row mt-1 mb-1">
+                                    <div class="col-1">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                    <div class="col-11">
+                                        <a class="ctm-a" href="#">
+                                            <p class="ctm-p-m text-white">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

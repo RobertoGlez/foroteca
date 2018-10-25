@@ -20,8 +20,9 @@ export class DashboardComponent implements OnInit {
     maestro:false
   }
   public op = {
-    perfil:true,
-    articulos:false
+    perfil:false,
+    articulos:false,
+    bio:true
   }
 
   public articulos = [1,2,3,4,5,6,7,8,9]
@@ -54,11 +55,19 @@ export class DashboardComponent implements OnInit {
       if(this.op.articulos == false){
         this.op.articulos = true;
         this.op.perfil = false;
+        this.op.bio = false;
       }
     }else if(type == 1){
       if(this.op.perfil == false){
         this.op.perfil = true;
+        this.op.articulos = false
+        this.op.bio = false;
+      }
+    }else if(type == 2){
+      if(this.op.bio == false){
+        this.op.bio = true;
         this.op.articulos = false;
+        this.op.perfil = false;
       }
     }
     console.log("Roles", this.rol);
@@ -68,4 +77,8 @@ export class DashboardComponent implements OnInit {
     console.log(form.valid);
   }
 
+  updateBio(form:NgForm){
+    console.log(form.value);
+    console.log(form.valid);
+  }
 }
