@@ -1,81 +1,108 @@
 <div class="contenedor">
+    <!-- ---------BUSCADOR--------- -->
     <div class="row">
-        <div class="col-xl-5 col-sm-10">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 ctm_margin border_edit custom-width1" type="text" placeholder="¿Qué quieres saber?">
-                <button class="btn bg-ft-primary my-2 my-sm-0 border_edit custom-width2 ctm_padding" type="button"> 
+        <div class="col-5">
+            <form class="form-inline">
+                <input class="w-75 form-control ctm-border" type="text" placeholder="¿Qué quieres saber?">
+                <button class="w-25 btn bg-ft-primary ctm-border" type="button"> 
                     <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
-        <div class="col-sm-2 d-flex">
-            <button class="btn ctm_btn my-2 my-sm-0 d-flex" type="button" data-toggle="tooltip" data-placement="right" title="Filtros"> 
-                    <i class="fas fa-sliders-h"></i>                
+        <div class="col-1 d-flex">
+            <button class="btn d-flex" type="button"> 
+                    <i class="ml-2 mr-2 fas fa-sliders-h"></i>                
             </button>
         </div>
     </div>
     <br>
     <hr>
-    <div class="row sm-titles">
-        <div class="col-xl-8 col-sm-12">
+    <!-- ---------TITULOS--------- -->
+    <div class="row">
+        <div class="col-8 ctm-p-m">
             <h1>Recientes</h1>
         </div>
-        <div class="col ctm_margin4">
+        <div class="col-4 ctm-p-m">
             <h1>Usuarios</h1>
         </div>
     </div>
+    <!-- ---------ARTICULOS RECIENTES--------- -->
     <div class="row">
-        <!-- ARTICULOS RECIENTES -->
-        <div class="col-xl-8 col-sm-12 bg-white">
-            <div class="row bg-white mt-4 ctm_margin3 sombras" *ngFor="let articulo of articulos">
+        <div class="col-8 bg-white">
+            <div class="row bg-white ml-2 mr-2 mt-4 sombras" *ngFor="let articulo of articulos">
                 <div class="col">
-                    <!-- <div class="row d-flex justify-content-end z-index ctm_margin">
-                    <button class="btn">AYUDA!!!</button>
-
-                </div> -->
-                    <div class="row mt-2 pb-3 pl-3 pr-3">
-
-                        <div class="col-xl-2 col-sm-2">
-                            <img class="ctm_img ml-2" src="assets/img/ex1.jpg">
+                    <div class="row mt-2">
+                        <div class="col-2">
+                            <a class="ctm-a" href="#">
+                                <img class="ctm-img mt-4" src="assets/img/ex1.jpg">
+                            </a>
                         </div>
-                        <div class="col-xl-9 col-sm-8 ctm_text">
-                            <div class="row">
-                                <h3>Como mejorar las capacidades de aprendizaje</h3>
+                        <div class="col-9">
+                            <div class="row justify-content-center">
+                                <a class="ctm-a" href="#">
+                                    <h3>Mejorar el aprendizaje</h3>
+                                </a>
                             </div>
                             <div class="row">
-                                <p>TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                <a class="ctm-a" href="#">
+                                    <p class="foroteca-primary">TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                </a>
                             </div>
                             <div class="row">
-                                <div class="col">
-                                    <p class="ctm_text2">Prof. Margarita Mendoza Cruz</p>
+                                <div class="col-6">
+                                    <div class="row">
+                                        <a class="ctm-a" href="">
+                                            <p class="text-muted">Prof. Margarita Mendoza Cruz</p>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <p class="ctm_text3">Hace 20 minutos</p>
+                                <div class="col-6">
+                                    <div class="row justify-content-end">
+                                        <a class="ctm-a" href="">
+                                            <p class="text-muted">Hace 20 minutos</p>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-1 col-sm-1">
-                            <button class="btn ctm_btn bg-white" type="button"> 
-                                    <i class="fas fa-angle-down"></i>
+                        <div class="col-1">
+                            <button class="btn bg-white" type="button"> 
+                                <i class="foroteca-primary fas fa-angle-down"></i>
                             </button>
                         </div>
                     </div>
-                    <div class="row bg-ft-primary ctm_margin ctm_height3">
-                        <i class="fas fa-tag"></i>
-                        <p class="ctm_text4">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                    <div class="row">
+                        <div class="col bg-ft-primary">
+                            <div class="row mt-1 mb-1">
+                                <div class="col-1">
+                                    <i class="fas fa-tag"></i>
+                                </div>
+                                <div class="col-11">
+                                    <a class="ctm-a" href="#">
+                                        <p class="ctm-p-m text-white">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- USUARIOS -->
-        <div class="col sm-usarios-content">
-            <div class="bg-white ctm_margin5">
-                <div class="row bg-primary ctm_margin3" *ngFor="let articulo of articulos">
-                    <div class="col-3">
-                        <img class="ctm_img2" src="assets/img/ex1.jpg" alt="">
-                    </div>
-                    <div class="col">
-                        <h5 class="ctm_text5">Ing. Fulanito Pérez Escalante</h5>
+        <!-- ---------USUARIOS--------- -->
+        <div class="col-3 ml-4 ctm-p-m bg-white">
+            <div class="row bg-primary mt-3 ml-2 mr-2" *ngFor="let articulo of articulos">
+                <div class="col-3 ctm-p-m">
+                    <a class="ctm-a" href="#">
+                        <img class="ctm-img2 mt-1 mb-1 ml-2" src="assets/img/ex1.jpg">
+                    </a>
+                </div>
+                <div class="col">
+                    <div class="row mt-3">
+                        <div class="col">
+                            <a class="ctm-a" href="#">
+                                <h5>Alumno Fulanito Pérez</h5>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

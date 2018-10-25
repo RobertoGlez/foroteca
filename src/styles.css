@@ -10,6 +10,24 @@
     margin: auto;
 }
 
+.ctm-p-m {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ctm-border-none {
+    border: none !important;
+}
+
+.ctm-a {
+    color: black;
+}
+
+.ctm-a:hover {
+    text-decoration: none;
+    color: black;
+}
+
 .foroteca {
     font-family: foroteca;
 }

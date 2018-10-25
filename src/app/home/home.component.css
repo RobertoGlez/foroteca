@@ -1,76 +1,3 @@
-.col-1,
-.col-2,
-.col-3,
-.col-4,
-.col-5,
-.col-6,
-.col-7,
-.col-8,
-.col-9,
-.col-10,
-.col-11,
-.col-12,
-.col,
-.col-auto,
-.col-sm-1,
-.col-sm-2,
-.col-sm-3,
-.col-sm-4,
-.col-sm-5,
-.col-sm-6,
-.col-sm-7,
-.col-sm-8,
-.col-sm-9,
-.col-sm-10,
-.col-sm-11,
-.col-sm-12,
-.col-sm,
-.col-sm-auto,
-.col-md-1,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-md-10,
-.col-md-11,
-.col-md-12,
-.col-md,
-.col-md-auto,
-.col-lg-1,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12,
-.col-lg,
-.col-lg-auto,
-.col-xl-1,
-.col-xl-2,
-.col-xl-3,
-.col-xl-4,
-.col-xl-5,
-.col-xl-6,
-.col-xl-7,
-.col-xl-8,
-.col-xl-9,
-.col-xl-10,
-.col-xl-11,
-.col-xl-12,
-.col-xl,
-.col-xl-auto {
-    padding: unset;
-}
-
 .sombras {
     box-shadow: 2px 2px 15px #666;
 }
@@ -80,144 +7,28 @@ input::placeholder {
     opacity: 0.3;
 }
 
-.ctm_padding {
-    padding: 5px;
-}
-
-.ctm_btn {
-    margin-left: 10px;
-}
-
-.z-index {
-    z-index: 1000;
-}
-
-
-/* ------Custom Margin------ */
-
-.ctm_margin {
-    margin: 0px !important;
-}
-
-.margin_edit2 {
-    margin-left: 10px;
-    margin-bottom: 0px !important;
-}
-
-.ctm_margin3 {
-    margin: 15px;
-}
-
-.ctm_margin4 {
-    margin-left: 25px;
-}
-
-.ctm_margin5 {
-    padding: 20px 0px;
-    margin-left: 25px;
-}
-
-
-/* ------Customs Height------ */
-
-.ctm_height2 {
-    line-height: 30px;
-}
-
-.ctm_height {
-    position: absolute;
-    height: 50px;
-}
-
-.ctm_height3 {
-    height: 30px;
-}
-
-
-/* ------Custom Width------ */
-
-.custom-width1 {
-    width: 85%;
-    height: 50px !important;
-}
-
-.custom-width2 {
-    width: 15% !important;
-    height: 50px !important;
-}
-
-.custom-width3 {
-    height: 50px;
-}
-
-
-/* ------Custom Border------ */
-
-.border_edit {
+.ctm-border {
     border-radius: 0%;
     border-width: 1px;
     border-color: #00ad92;
     border-style: solid;
 }
 
-
-/* ------Custom Texts------ */
-
-.ctm_text>div>h3 {
-    margin: 0;
-    margin-bottom: 15px;
-    letter-spacing: 0px;
-    font-weight: bolder;
-}
-
-.ctm_text>div>p {
-    font-size: 15px;
-    margin: 0;
-    margin-bottom: 5px;
-    letter-spacing: 0px;
-    color: #00ad92;
-}
-
-.ctm_text>div>div>p {
-    font-size: 13px;
-    margin: 0;
-    margin-bottom: 10px;
-    letter-spacing: 0px;
-    color: #8a8a8a;
-}
-
-.ctm_text3 {
-    float: right;
-}
-
-.ctm_text2 {
-    float: left;
-}
-
-.ctm_text4 {
-    font-size: 13px;
-    margin: 0 !important;
-    margin-top: 4px !important;
-}
-
-.ctm_text5 {
-    color: white;
-    letter-spacing: 0px;
-    line-height: 80px;
+.ctm-border-none:hover {
+    color: black !important;
+    background-color: white !important;
 }
 
 
 /* ------Custom Images------ */
 
-.ctm_img {
+.ctm-img {
     width: 100px;
     height: 100px;
     border-radius: 100px;
 }
 
-.ctm_img2 {
-    margin-left: 5px;
-    margin-top: 6px;
+.ctm-img2 {
     height: 75px;
     width: 75px;
     border-radius: 50px;
@@ -226,72 +37,10 @@ input::placeholder {
 
 /* ------Custom Icons------ */
 
-.fa-tag {
-    font-size: 15px;
-    margin: 5px 10px;
-}
-
 .fa-angle-down {
-    line-height: 60%;
-    font-size: 250%;
-    color: #00ad92;
+    font-size: 30px;
 }
 
-.fa-sliders-h {
-    font-size: 35px;
+.fa-tag {
+    font-size: 20px;
 }
-
-.fa-search {
-    font-size: 25px;
-}
-
-
-/* ------------Responsive Design------------ */
-
-
-/* ---Small devices (landscape phones, 576px and up)--- */
-
-@media (max-width: 576px) {
-    .sm-titles {
-        display: none;
-    }
-    .sm-usarios-content {
-        display: none;
-    }
-    .ctm_img {
-        margin: 10px !important;
-        height: 75px;
-        width: 75px;
-        border-radius: 150px;
-    }
-    .ctm_btn {
-        margin: 0px;
-    }
-    .fa-angle-down {
-        font-size: 150%;
-    }
-    /* ------Custom Texts------ */
-    .ctm_text {
-        margin-left: 2%;
-    }
-    .ctm_text>div>h3 {
-        font-size: 15px;
-        margin-bottom: 8px;
-    }
-    .ctm_text>div>p {
-        font-size: 10px;
-    }
-    .ctm_text>div>div>p {
-        font-size: 10px;
-    }
-}
-
-
-/* Medium devices (tablets, less than 992px) */
-
-@media (min-width: 577px) and (max-width: 750px) {}
-
-
-/* Large devices (desktops, less than 1200px) */
-
-@media (min-width: 751px) and (max-width: 1024px) {}
