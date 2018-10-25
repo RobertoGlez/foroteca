@@ -5,10 +5,10 @@ import { FormsModule } from '@angular/forms';
 
 //Componentes
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
+
 //Componenetes de rutas
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -25,9 +25,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 //Enviroment
 import { environment } from '../environments/environment';
+
+//Componente Generado
+import { HomeComponent } from './home/home.component';
 import { ArticleComponent } from './article/article.component';
 import { ThemeComponent } from './theme/theme.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
     SigninComponent,
     ArticleComponent,
     ThemeComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

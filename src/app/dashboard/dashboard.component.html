@@ -1,5 +1,245 @@
-<p>
-  dashboard works!
-</p>
+<div class="contenedor">
+    <hr>
+    <div class="row bg-white">
+        <div class="col-xl-3 col-lg-3 bg-ft-primary">
+            <div class="row">
+                <img src="assets/img/ex1.jpg" class="ctm-img">
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h5 class="text-center">David Montores Escalante</h5>
+                </div>
+                <div class="col-12">
+                    <h5 class="text-center">Estudiante</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <!-- <input type="radio" name="rol" required ngModel value="maestro" (click)="changeRol(0)"> -->
+                <button class="btn-outline-light ctm-btn" name="op" value="perfil" (click)="changeOP(1)">
+                  <div class="row ml-2 mr-2">
+                    <div class="col-1">
+                      <i class="fas fa-edit"></i>
+                    </div>
+                    <div class="col-9">
+                      <h5>Editar mi perfil</h5>
+                    </div>
+                  </div>
+                  </button>
+            </div>
+            <div class="row">
+                <button class="btn-outline-light ctm-btn" name="op" value="articulos" (click)="changeOP(0)">
+                  <div class="row ml-2 mr-2">
+                    <div class="col-1">
+                      <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="col-9">
+                      <h5>Mis Artículos</h5>
+                    </div>
+                  </div>
+                  </button>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 bg-white">
+            <div class="conteiner animated fadeIn" *ngIf="op.perfil">
+                <br>
+                <h2 class="text-center">Editar Perfil</h2>
+                <h6 class="text-center text-muted">Edita el formulario con tus nuevos datos</h6>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11 m-auto">
+                            <hr>
+                            <form #usuario="ngForm" (ngSubmit)="registrarUsuario(usuario)" validate>
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- <div class="form-group col-12">
+                                      <label for="">Matricula *</label>
+                                      <input type="text" class="form-control" id="matricula" placeholder="Matricula" (focusout)="revisarMatricula()">
+                                  </div> -->
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="">Nombre</label>
+                                            <input type="text" class="form-control" placeholder="Nombre" required name="nombre" ngModel>
+                                        </div>
+
+                                        <div class=" col-md-6 col-sm-12">
+                                            <label for="">Apellidos</label>
+                                            <input type="text" class="form-control" placeholder="Apellidos" required name="apellidos" ngModel>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="">Correo Electronico</label>
+                                            <input type="email" class="form-control" placeholder="Correo Electronico" required name="email" ngModel>
+                                        </div>
+                                        <div class=" col-md-6 col-sm-12">
+                                            <label for="">Contraseña</label>
+                                            <input type="password" class="form-control" placeholder="Contraseña" name="password" ngModel>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="">Repetir contraseña</label>
+                                            <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2" ngModel>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class=" row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="radio" name="rol" required checked ngModel value="estudiante" (click)="changeRol(1)">
+                                                        </div>
+                                                    </div>
+                                                    <label class="form-control">Estudiante</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="form-group">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <input type="radio" name="rol" required ngModel value="maestro" (click)="changeRol(0)">
+                                                        </div>
+                                                    </div>
+                                                    <label class="form-control">Maestro</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="">Division</label>
+                                                </div>
+                                                <select class="custom-select" id="division" name="division" ngModel>
+                                              <option value="" selected >Seleccione su división...</option>
+                                              <option value="" >Turismo y hoteleria</option>
+                                              <option value="" >Tecnologias de la informacion</option>
+                                          </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
+                                    <!-- Contenedor estudiante -->
+
+                                    <div class="row animated fadeIn" *ngIf="rol.estudiante">
+                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="">Carrera</label>
+                                                </div>
+                                                <select class="custom-select" name="carrera" ngModel>
+                                              <option value="" selected >Seleccione su carrera...</option>
+                                              <option value="" >Turismo y hoteleria</option>
+                                              <option value="" >Tecnologias de la informacion</option>
+                                          </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="">Cuatrimestre</label>
+                                                </div>
+                                                <select class="custom-select" id="cuatrimestre" name="cuatrimestre" ngModel>   
+                                              <!-- <option value="" ngCheked> Seleccione su cuatrimestre </option> -->
+                                              <option value="1">Primer Cuatrimestre</option>
+                                              <option value="2" >Segundo Cuatrimestre</option>
+                                              <option value="3" >Tercer Cuatrimestre</option>
+                                              <option value="4" >Cuarto Cuatrimestre</option>
+                                              <option value="5" >Quinto Cuatrimestre</option>
+                                              <option value="6" >Sexto Cuatrimestre</option>
+                                          </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!-- / Contenedor estudiantes -->
+                                    <!-- Contenedor maestros -->
+
+
+                                    <div class="row animated fadeIn" *ngIf="rol.maestro">
+                                        <div class="col-12">
+                                            <div class="input-group ">
+                                                <div class="input-group-prepend">
+                                                    <label class="input-group-text" for="">Grado de estudios</label>
+                                                </div>
+                                                <select class="custom-select" id="grado" name="grado" ngModel required>
+                                              <option selected >Seleccione su grado...</option>
+                                              <option value="" >Licenciatura</option>
+                                              <option value="" >Ingenieria</option>
+                                              <option value="">Maestria</option>
+                                          </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="">Carrera</label>
+                                            <input type="text" class="form-control" placeholder="Escriba el título que posee" name="titulo" ngModel required>
+                                        </div>
+                                    </div>
+
+                                    <!-- /Contenedor maestros -->
+                                    <div class="row my-3">
+                                        <div class="col m-auto ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="terminos" ngModel name="terminos">
+                                                <label class="form-check-label" for="gridCheck">
+                                                  Acepto terminos y condiciones
+                                              </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary text-center mb-3">Editar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="animated fadeIn" *ngIf="op.articulos">
+                <div class="row bg-white mt-4 ctm_margin3 sombras" *ngFor="let articulo of articulos">
+                    <div class="col">
+                        <!-- <div class="row d-flex justify-content-end z-index ctm_margin">
+                        <button class="btn">AYUDA!!!</button>
+    
+                    </div> -->
+                        <div class="row mt-2 pb-3 pl-3 pr-3">
+
+                            <div class="col-xl-2 col-sm-2">
+                                <img class="ctm_img ml-2" src="assets/img/ex1.jpg">
+                            </div>
+                            <div class="col-xl-9 col-sm-8 ctm_text">
+                                <div class="row">
+                                    <h3>Como mejorar las capacidades de aprendizaje</h3>
+                                </div>
+                                <div class="row">
+                                    <p>TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="ctm_text2">Prof. Margarita Mendoza Cruz</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="ctm_text3">Hace 20 minutos</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-sm-1">
+                                <button class="btn ctm_btn bg-white" type="button"> 
+                                        <i class="fas fa-angle-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row bg-ft-primary ctm_margin ctm_height3">
+                            <i class="fas fa-tag"></i>
+                            <p class="ctm_text4">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

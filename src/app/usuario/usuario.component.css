@@ -1,40 +1,25 @@
-.ctm-img {
+.ctm-p-m {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.ctm-img-bg {
+    background-image: url('../../assets/img/usuario-wallpaper.jpg');
+    background-size: cover;
+    height: 500px;
+}
+
+.ctm-mrg {
+    margin-top: 100px;
+}
+
+.ctm-img-us {
     width: 200px;
     height: 200px;
     border-radius: 150px;
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.ctm-btn {
-    height: 50px;
-    width: 100%;
+    border-width: 5px;
+    border-color: white;
     border-style: solid;
-    border-width: 0 0 1px 0;
-    border-color: black;
-}
-
-.ctm-btn>div>div>h5 {
-    text-align: start;
-}
-
-.ctm-btn:hover {
-    background-color: #008f79;
-    cursor: pointer;
-}
-
-@media (max-width:991px) {
-    .ctm-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 150px;
-        display: block;
-        margin: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
 }
 
 
