@@ -15,10 +15,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 
+//services
+import { AuthService } from './servicios/auth.service';
+
 //Firebase
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 //Enviroment
 import { environment } from '../environments/environment';
 
@@ -48,10 +52,14 @@ import { UsuarioComponent } from './usuario/usuario.component';
     AngularFireModule.initializeApp(environment.firebase), //For firebase config
     AngularFireDatabaseModule, // for database
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule
     
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

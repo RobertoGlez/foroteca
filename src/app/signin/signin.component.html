@@ -52,6 +52,7 @@
                         placeholder="Correo Electronico" 
                         required 
                         name="email"
+                        email="true" 
                         ngModel 
                         #email="ngModel"
                         >
@@ -60,6 +61,9 @@
                                 <div [hidden]="!email.errors.required">
                                     <p class="text-danger">Necesitas un email, estamos en {{ year }}</p>
                                 </div>
+                                <div *ngIf="email.errors.email">
+                                    <p class="text-muted"> Esto no se ve como un email </p>
+                                </div> 
                                 <div *ngIf="">
                                     <p class="text-danger">Ya existe este email, ¿una cuenta fake eh?</p>
                                 </div>
@@ -72,12 +76,20 @@
                         placeholder="Contraseña" 
                         name="password"
                         #passOne="ngModel"
+                        pattern=".{8,15}"
                         required
                         ngModel>
                         <div *ngIf="passOne.errors && (passOne.dirty || passOne.touched)" class="">
                                 <div [hidden]="!passOne.errors.required">
                                     <p class="text-danger position-absolute">Te falto este campo</p>
                                     <br>
+                                </div>
+                                <div [hidden]="!passOne.errors.pattern">
+                                    <p class="text-danger">
+                                        <small>
+                                        La contraseña debe contener al menos 8 a 15 caracteres
+                                        </small>
+                                    </p>    
                                 </div>
                         </div>
                     </div>
@@ -95,8 +107,14 @@
                            
                                 <div [hidden]="!passTwo.errors.required">
                                     <p class="text-danger">Te falto este campo</p>
-                                    
                                 </div>
+                                <!-- <div [hidden]="!passTwo.errors.pattern">
+                                        <p class="text-danger">
+                                            <small>
+                                            La contraseña debe contener al menos 8 caracteres
+                                            </small>
+                                        </p>    
+                                </div> -->
                                 
                         </div>
                     </div>
@@ -120,6 +138,7 @@
                                 <div class="input-group-text">
                                 <input type="radio" 
                                 name="rol"
+                                
                                 id="estudiante" 
                                 required
                                 ngModel
@@ -140,6 +159,7 @@
                                 name="rol" 
                                 required  
                                 ngModel
+                                
                                 value="maestro" 
                                 (click)="changeRol(0)">
                                 </div>
@@ -148,6 +168,9 @@
                             </div>
                     </div>
                 </div>
+                <!-- <div class="col-12 text-center text-muted" *ngIf="rol.invalid">
+                    <p>Necesitas un rol</p>
+                </div> -->
                 <div class="col-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

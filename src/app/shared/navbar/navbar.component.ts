@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../servicios/auth.service';
+import { Usuario } from '../../models/usuarios.interface'
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  // public userNav:Usuario
+  constructor(public auth:AuthService) { 
+    
   }
 
+  ngOnInit() {
+    
+  }
+
+
+  login(){
+    // this.auth.login();
+  }
+  cerrarSession(){
+    var confirmar = confirm("¿Desea cerrar session?")
+    if(confirmar){
+      this.auth.signOut();
+    }
+  }
 }

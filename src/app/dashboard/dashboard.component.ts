@@ -5,7 +5,7 @@ import * as Quill from 'quill';
 import { OPTIONS } from '../core/editor/configuration-editor';
 import { SigninService } from '../servicios/signin.service'
 import { NgForm } from '@angular/forms'; 
-import { uRegistro } from '../models/usuarios.interface';
+import { Usuario } from '../models/usuarios.interface';
 import * as $ from 'jquery';
 
 @Component({
