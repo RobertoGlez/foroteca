@@ -5,13 +5,20 @@ export interface Usuario{
     apellidos:string;
     email:string;
     // password:string;
-    tipo:number; //0 maestro, 1 usuario
+    tipo:string; //0 maestro, 1 usuario
     division:string;
     //if alumno
-    carrera?:string;
+    carrera?:{
+        abr:string,
+        titulo:string,
+        label:string
+    };
     cuatrimestre?:string;
     //if maestro
-    grado?:string;
+    grado?:{
+        abr:string,
+        titulo:string,
+    };
     titulo?:string;
 }
 

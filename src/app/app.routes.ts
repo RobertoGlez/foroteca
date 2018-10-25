@@ -14,7 +14,7 @@ const APP_ROUTES : Routes = [
     {path:'registrarse',component:SigninComponent},
     {path:'mi-panel',component:DashboardComponent},
     {path:'tema',component:ThemeComponent},
-    {path:'nuevo-articulo',component:ArticleComponent},
+    {path:'mi-articulo',component:ArticleComponent},
     {path:'usuario',component:UsuarioComponent},
     {path:'no-encontrado',component:NopagefoundComponent},
     {path:'',pathMatch:'full',redirectTo:'/inicio'},

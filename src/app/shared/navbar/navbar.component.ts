@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../servicios/auth.service';
 import { Usuario } from '../../models/usuarios.interface'
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
 

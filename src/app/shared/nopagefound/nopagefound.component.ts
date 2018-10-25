@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from  '@angular/router'
 @Component({
   selector: 'app-nopagefound',
   templateUrl: './nopagefound.component.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NopagefoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(public route:Router) { }
 
   ngOnInit() {
+    // console.log("Ruta activa",this.route.url);
   }
 
 }

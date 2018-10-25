@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand foroteca" href="/inicio" style="font-size: 1.8rem;"> 
+    <a class="navbar-brand foroteca" href="#" routerLink="/inicio" style="font-size: 1.8rem;"> 
         <img src="/assets/logo/IconForoteca.png" width="30" class="align-middle" alt="">
         Foro<span class="foroteca-primary">teca</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,8 +11,8 @@
         </ul>
         <div class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-2">
-                    <a class=" btn btn-outline-primary" href="#">
+                <li class="nav-item mr-2" *ngIf="auth.user | async">
+                    <a class=" btn btn-outline-primary" href="#" routerLink="/mi-articulo" routerLinkActive="active">
                         <i class="fas fa-plus-square"></i> Nuevo Artículo
                     </a>
                 </li>
@@ -23,7 +23,7 @@
                     <ng-template #registeredTemplate>
                         <div class="dropdown" *ngIf="this.auth.dataUser">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ this.auth.dataUser.nombre }}
+                            {{ this.auth.dataUser.nombre  + ' ' + this.auth.dataUser.apellidos}} 
                             </a>
                         
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

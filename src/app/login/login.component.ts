@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms' 
 import { AuthService } from '../servicios/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,9 +9,18 @@ import { AuthService } from '../servicios/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth:AuthService) { }
+  constructor(public auth:AuthService,private _route:Router) { }
 
   ngOnInit() {
+    this.auth._firebaseAuth.authState.subscribe(u=>{
+      if(u){
+        // console.log("Usuario validado en memoria", u);
+        console.log("Saliendo");
+        this._route.navigate(['/inicio']);
+      }else{
+        console.log("Sin usuario");
+      }
+    });
   }
 
   iniciarSesion(login:NgForm){

@@ -1,14 +1,49 @@
-<p>
-  article works!
-</p>
-<div id="editor">
-  
+<div class="nologin text-center" *ngIf="!login">
+  <h2>Necesita estar registrado para publicar un articulo :C</h2>
+  <button class="btn btn-primary" routerLink="/registrarse">Registrarse</button>
 </div>
-<button class="btn btn-primary" (click)="enviar()">
-  Guardar
-</button>
-<h3>Salida de contenido</h3>
+<div class="login" *ngIf="login">
+  <h2 class="text-center">Comparte tu conocimiento</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 m-auto">
+          <form #articulo=ngForm (ngSubmit)="guardarArticulo(articulo)" validate  >
+            <div class="form-group">
+              <label for="">Titulo:</label>
+              <input type="text" placeholder="{{ auth.dataUser.nombre }}, ¿Cómo se llamará tu obra?" class="form-control" name="nombreArticulo" required ngModel #nombreArticulo="ngModel" >
+              <div *ngIf="nombreArticulo.errors && (nombreArticulo.dirty || nombreArticulo.touched)">
+                  <small [hidden]="!nombreArticulo.errors.required" class="text-danger">Necesita llenar este campo</small>
+              </div>
+                
+            </div>
+            <div class="form-group">
+              <label for="">Tags:</label> <br>
+              <small class="text-muted"> 
+                <strong>Nota:</strong> Coloque palabras clave separadas por coma
+              </small>
+              <input type="text" placeholder="¿Quiéres poner algunas palabras clave?" class="form-control" name="tags" required ngModel #tags="ngModel">
+              <div *ngIf="tags.errors && (tags.dirty || tags.touched)">
+                  <small [hidden]="!tags.errors.required" class="text-danger">Necesita llenar este campo</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <div id="editor">
+
+              </div>
+            </div>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="!articulo.valid">
+                Publicar
+            </button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <h3>Salida de contenido</h3>
 
 <div id="salida" class="ql-editor">
 
-</div>
+</div> -->

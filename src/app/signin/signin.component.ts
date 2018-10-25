@@ -6,6 +6,7 @@ import { Usuario } from '../models/usuarios.interface';
 import { universidad } from '../core/universidad.carreras';
 import { grados } from '../core/universidad.grados';
 import * as $ from 'jquery';
+import { Router } from '@angular/router';
 // import tooltip from 'popper.js'
 
 @Component({
@@ -24,7 +25,7 @@ export class SigninComponent implements OnInit {
   public divisionIndex = 0;
   public registrando = false;
   public pass = false;
-  constructor(public _regService:SigninService,private atuhS:AuthService) { 
+  constructor(public _regService:SigninService,private atuhS:AuthService,public _route:Router) { 
     // console.log("Universidad Data:" , this.u);
   }
 
@@ -32,6 +33,15 @@ export class SigninComponent implements OnInit {
     var year = new Date();
     this.year = year.getFullYear();
     console.log(this.year)
+    this.atuhS._firebaseAuth.authState.subscribe(u=>{
+      if(u){
+        // console.log("Usuario validado en memoria", u);
+        console.log("Saliendo");
+        this._route.navigate(['/inicio']);
+      }else{
+        console.log("Sin usuario");
+      }
+    });
    
   }
 
