@@ -15,11 +15,23 @@ import { AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } 
 export class AuthService {
   private user: Observable<firebase.User>;
   private userCollection:AngularFirestoreCollection<Usuario>
-
+  public dataUser:Usuario = undefined;
   constructor(public router: Router,
               public _firebaseAuth:AngularFireAuth,
               public db:AngularFirestore) {
-    this.user = _firebaseAuth.authState
+    this.user = _firebaseAuth.authState;
+    this.user.subscribe(user=>{
+      if(user){ 
+        this.db.doc<Usuario>("usuarios/"+user.uid).ref.get().then(u=>{
+          let user = u.data() as Usuario;
+          this.dataUser = user;
+          console.log("Usuario Login" ,this.dataUser);
+        })
+      }else{
+        this.dataUser = undefined;
+        console.log("No tienes session iniciada");
+      }
+    })
   }
   public singIn(email,pass,newUser:Usuario){
     firebase.auth().createUserWithEmailAndPassword(email,pass).then((UserCreate)=>{
@@ -55,6 +67,16 @@ export class AuthService {
       
     }).catch(err=>{
       console.log("Hubo un error",err);
+    });
+  }
+
+  public signOut(){
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      console.log("Se cerro correctamente");
+    }).catch(function(error) {
+      // An error happened.
+      console.error("Se produjo un error",error);
     });
   }
 
