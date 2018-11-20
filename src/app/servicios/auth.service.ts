@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import { AngularFireAuth  } from 'angularfire2/auth';
 import { Usuario } from '../models/usuarios.interface';
@@ -13,25 +14,31 @@ import { AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } 
   providedIn: 'root'
 })
 export class AuthService {
-  private user: Observable<firebase.User>;
+  private userLoginState: Observable<firebase.User>;
+  public userObservador:Observable<Usuario>;
   private userCollection:AngularFirestoreCollection<Usuario>
+  private UserDocument:AngularFirestoreDocument<Usuario>
   public dataUser:Usuario = undefined;
+
   constructor(public router: Router,
               public _firebaseAuth:AngularFireAuth,
               public db:AngularFirestore) {
-    this.user = _firebaseAuth.authState;
-    this.user.subscribe(user=>{
+
+    this.userLoginState = _firebaseAuth.authState;
+    this.userLoginState.subscribe(user=>{
       if(user){ 
-        this.db.doc<Usuario>("usuarios/"+user.uid).ref.get().then(u=>{
-          let user = u.data() as Usuario;
-          this.dataUser = user;
-          console.log("Usuario Login" ,this.dataUser);
+        this.UserDocument =  this.db.doc<Usuario>("usuarios/"+user.uid);
+        this.userObservador = this.UserDocument.valueChanges();
+        this.userObservador.subscribe(u => {
+          this.dataUser = u
+          console.log("User", this.dataUser)
         })
+        
       }else{
         this.dataUser = undefined;
-        console.log("No tienes session iniciada");
+        // console.log("No tienes session iniciada");
       }
-    })
+    });
   }
   public singIn(email,pass,newUser:Usuario){
     firebase.auth().createUserWithEmailAndPassword(email,pass).then((UserCreate)=>{
@@ -77,6 +84,34 @@ export class AuthService {
     }).catch(function(error) {
       // An error happened.
       console.error("Se produjo un error",error);
+    });
+  }
+  /**
+   * Funcion que determina si el usuario esta logueado o no, y que consulta los datos en firebase.
+   * por defecto tiene 10 intentos cada 500 milisegundos
+   * @param trying_ Tipo numero - Numero de intentos que tiene la peticion 
+   * @param timeInterval_  Tipo Numero - cantidad de milisegundos en que se hara cada peticion
+   */
+  public LoginStatus(trying_?:10,timeInterval_?:500){
+    return new Promise((resolve,reject)=>{
+      let Logueado = this.userLoginState.subscribe(estado=>{
+        if(estado){
+          let veces = 0;
+          let intentos = trying_;
+          var intervalo = setInterval(()=>{
+            if(this.dataUser){
+              clearInterval(intervalo);
+              resolve(true);
+            }
+            if(veces > intentos){
+              clearImmediate(intervalo)
+              reject(" No se encontro datos del usuario");
+            }
+          },timeInterval_);
+        }else{
+          reject("No esta logueado");
+        }
+      });
     });
   }
 

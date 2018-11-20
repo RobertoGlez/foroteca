@@ -15,7 +15,7 @@ export const OPTIONS =  [
   
     [{ 'color': [] }/*, { 'background': [] }*/],          // dropdown with defaults from theme
     // [{ 'font': [] }],
-    [/*{ 'align': [] }*/, 'link'],
+    [/*{ 'align': [] }*/, 'link','image',{'align':[]}],
   
     // ['image','code-block','formula']                                         // remove formatting button
   ];

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as Quill from 'quill';
+import Tagify from '@yaireo/tagify';
+import { WHITELIST, BLACKLIST } from '../core/editor/whitelist-tags';
 import { OPTIONS } from '../core/editor/configuration-editor';
+import { universidad } from '../core/universidad.carreras'
 import { NgForm } from '@angular/forms';
 // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';npm install quill-delta-to-html
 import { Formatter } from 'delta-transform-html'
@@ -15,12 +18,25 @@ import * as moment from 'moment';
   styleUrls: ['./article.component.css']
 })
 export class ArticleComponent implements OnInit {
-  private newArticle:Articulo = undefined;
-  public contenedor:HTMLElement;
+  public cargando = true;
+  public login = false;
+  public uni = universidad;
+  public division = 0;
   
-  public salida:HTMLElement;
+  private newArticle:Articulo = undefined;
+
+  //Tagify 
+  public input:HTMLElement;
+  public tagify;
+
+  //Quilljs
+  public contenedor:HTMLElement;
+  //iniciar editor
   public editor;
-  public c = false;
+
+
+  // public salida:HTMLElement;
+  //Oppciones de editor
   public options = {
     modules: {
       toolbar: OPTIONS
@@ -29,54 +45,66 @@ export class ArticleComponent implements OnInit {
     theme: 'snow',
   }
   
-  public login = false;
 
   public transformer = new Formatter();
-  constructor(public auth:AuthService) { }
+  constructor(public auth:AuthService) {
 
+  }
+  changeDivision(index){
+    this.division = index
+  }
   ngOnInit() {
+
+   
+
     console.log("Fecha",moment().format("YYYY-MM-DD HH:mm:ss"))
     // this.salida = document.getElementById('salida')
     // console.log(this.contenedor);
     
     
-    var logueago = this.verificarLogin()
-    logueago.then(usuario=>{
-      console.log("Se encontro usuario",usuario);
+    this.auth.LoginStatus().then(login=>{
+      console.log("Se encontro usuario",login);
       this.login = true;
+      this.cargando = false;
+      
+      //Cargas Quilljs
       setTimeout(()=>{
-        this.contenedor  = document.getElementById('editor');
-        console.log(this.contenedor);
-        this.editor = new Quill(this.contenedor, this.options);
-      },1000);
-     
+        this.contenedor = document.getElementById('editor');
+        this.editor = new Quill(this.contenedor,this.options);
+
+        //Cargar Tags
+        this.input = document.querySelector('input[name=tags]');
+        this.tagify = new Tagify(this.input, {
+          whitelist : WHITELIST ,
+          blacklist : BLACKLIST
+        });
+      console.log(this.tagify)
+      },250);
+
     }).catch(erro=>{
+      this.login = false;
+      this.cargando = false;
       console.log("Error: ",erro);
     }) 
   }
 
-  verificarLogin(){
-    var count = 0;
-    return new Promise((resolve,reject)=>{
-      var maxP = 10 
-      
-      var i = setInterval(()=>{
 
-        if(this.auth.dataUser){
-          clearInterval(i);
-          resolve(this.auth.dataUser);
-        }
-  
-        if(count == maxP){
-          clearInterval(i)
-          reject("No se encontro session");
-        }
-        count ++;
-        
-      },500);
-     
-    });
-  }
+  // Deprecated!!
+  // verificarLogin(){
+  //  return new Promise ((resolve,reject)=>{
+  //   let logueado = this.auth.userLoginState.subscribe(estado=>{
+  //     if(estado){
+  //       var veces = 0;
+  //       var intentos = 10;
+  //       var i = setInterval(()=>{
+  //         if(this.auth.dataUser){
+
+  //         }
+  //       },500);
+  //     }
+  //   });
+  //  });
+  // }
 
   enviar(){
     

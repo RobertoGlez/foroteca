@@ -1,9 +1,82 @@
-<div class="nologin text-center" *ngIf="!login">
+<!-- Cargando -->
+<div class="cargando container" *ngIf="cargando">
+  <div class="login m-auto w-50">
+     <p class="text-center text-muted">
+          Preparando lienzo..
+    </p>
+    <p class="text-center display-4 text-muted" >
+        <i class="fas fa-circle-notch loadingItem"></i>
+    </p>
+    
+  </div>
+</div>
+
+<!-- En caso de no estar registrado -->
+<div class="nologin text-center" *ngIf="!login && !cargando">
   <h2>Necesita estar registrado para publicar un articulo :C</h2>
   <button class="btn btn-primary" routerLink="/registrarse">Registrarse</button>
 </div>
-<div class="login" *ngIf="login">
-  <h2 class="text-center">Comparte tu conocimiento</h2>
+
+<!-- Contenedor de la publicacion  -->
+<div class="login container-fluid bg-white" *ngIf="login && !cargando">
+<form action="">
+
+  <div class="row ">
+    <div class="col">
+        <div class="col-12 p-2">
+            <input type="text" class=" tituloSize" placeholder="Ponle un nombre a tu articulo">
+        </div>
+        <div class="col-12">
+          <p class="text-muted text-left">
+            <small>By {{ auth.dataUser.nombre }}</small>
+          </p>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col contenido">
+          <div class="container contenedor-editor">
+              <div id="editor" class="bg-white">
+
+              </div>
+          </div>
+      </div>
+      <div class="col-4  ajustes bg-ft-smoke p-3">
+        <div class="ContenedorAjustes">
+            <div class="form-group">
+              <label for="">División</label>
+              <select name="" id="" class="form-control">
+                <option value="">Seleccione una division</option>
+                <option value="{{ division.nombre }}" *ngFor="let division of uni; let i = index" (click)="changeDivision(i)"> {{ division.nombre }} </option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="">Carrera</label>
+                <select name="" id="" class="form-control">
+                  <option value="">Seleccione una carrera</option>
+                  <option value="{{ carrera.titulo + ' ' + carrera.label }}" *ngFor="let carrera of uni[division].carreras; let i = index" > {{ carrera.abr + ' - ' + carrera.label }} </option>
+                </select>
+            </div>
+            <div class="form-group ">
+                <!-- Tags de Tagify -->
+                <label for="">Tags:</label>
+                <input name='tags' class='tags-selector' placeholder='Escribe algunos tags' value='' autofocus>
+            </div>
+            
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+          <!-- <button class="btn btn-primary w-100" type="submit" >
+              Solo guardar
+          </button> -->
+          <button class="btn btn-primary w-50 " type="submit" >
+              Publicar
+          </button>
+      </div>
+  </div>
+</form>  
+  <!-- <h2 class="text-center">Comparte tu conocimiento</h2>
   <div class="container">
     <div class="row">
       <div class="col-10 m-auto">
@@ -37,11 +110,12 @@
           </form>
       </div>
     </div>
-  </div>
+  </div> -->
+
 </div>
+<!-- / Contenedor de la publicacion  -->
 
-
-
+<!-- Vista previa -->
 <!-- <h3>Salida de contenido</h3>
 
 <div id="salida" class="ql-editor">

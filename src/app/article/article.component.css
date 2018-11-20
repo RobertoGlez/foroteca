@@ -1,0 +1,11 @@
+.tituloSize{
+    border: none;
+    background: transparent;
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    width: 100%;
+}
+.contenedor-editor{
+    height: 85%;
+}

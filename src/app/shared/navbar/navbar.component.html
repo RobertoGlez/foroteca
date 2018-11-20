@@ -11,16 +11,24 @@
         </ul>
         <div class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-2" *ngIf="auth.user | async">
-                    <a class=" btn btn-outline-primary" href="#" routerLink="/mi-articulo" routerLinkActive="active">
-                        <i class="fas fa-plus-square"></i> Nuevo Artículo
-                    </a>
+                <li class="nav-item mr-2" *ngIf="this.auth.userLoginState | async ;">
+                        <a *ngIf="this.auth.dataUser" class=" btn btn-outline-primary" href="#" routerLink="/editor-articulo" routerLinkActive="active">
+                            <i class="fas fa-plus-square"></i> Nuevo Artículo
+                        </a>
                 </li>
                 
+                <li  *ngIf="cargando">
+                        <a href="" class="btn btn-primary loadingText" style="width: 150px;">
+                            <span class="">
+                                    <i class="fas fa-circle-notch loadingItem"></i>
+                            </span> 
+                        </a>
+                </li>
+                <li class="nav-item" *ngIf="!cargando">
 
-                <li class="nav-item  ">
-                    <ng-container *ngIf="auth.user | async; then registeredTemplate else noRegisteredTemplate;"></ng-container>
+                    <ng-container *ngIf="this.auth.userLoginState | async ; then registeredTemplate else noRegisteredTemplate;"></ng-container>
                     <ng-template #registeredTemplate>
+                        
                         <div class="dropdown" *ngIf="this.auth.dataUser">
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ this.auth.dataUser.nombre  + ' ' + this.auth.dataUser.apellidos}} 
