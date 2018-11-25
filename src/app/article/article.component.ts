@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Quill from 'quill';
 import Tagify from '@yaireo/tagify';
+
 import { WHITELIST, BLACKLIST } from '../core/editor/whitelist-tags';
 import { OPTIONS } from '../core/editor/configuration-editor';
 import { universidad } from '../core/universidad.carreras'
@@ -20,9 +21,12 @@ import * as moment from 'moment';
 export class ArticleComponent implements OnInit {
   public cargando = true;
   public login = false;
+
+  //Variables de las carreras
   public uni = universidad;
   public division = 0;
   
+  //Articulo
   private newArticle:Articulo = undefined;
 
   //Tagify 
@@ -30,12 +34,12 @@ export class ArticleComponent implements OnInit {
   public tagify;
 
   //Quilljs
+
   public contenedor:HTMLElement;
   //iniciar editor
   public editor;
+  // public vistaPrevia:HTMLElement;
 
-
-  // public salida:HTMLElement;
   //Oppciones de editor
   public options = {
     modules: {
@@ -53,17 +57,12 @@ export class ArticleComponent implements OnInit {
   changeDivision(index){
     this.division = index
   }
+
   ngOnInit() {
-
-   
-
-    console.log("Fecha",moment().format("YYYY-MM-DD HH:mm:ss"))
     // this.salida = document.getElementById('salida')
-    // console.log(this.contenedor);
-    
-    
+
     this.auth.LoginStatus().then(login=>{
-      console.log("Se encontro usuario",login);
+      // console.log("Se encontro usuario",login);
       this.login = true;
       this.cargando = false;
       
@@ -78,7 +77,7 @@ export class ArticleComponent implements OnInit {
           whitelist : WHITELIST ,
           blacklist : BLACKLIST
         });
-      console.log(this.tagify)
+        // console.log(this.tagify);
       },250);
 
     }).catch(erro=>{
@@ -88,25 +87,8 @@ export class ArticleComponent implements OnInit {
     }) 
   }
 
-
-  // Deprecated!!
-  // verificarLogin(){
-  //  return new Promise ((resolve,reject)=>{
-  //   let logueado = this.auth.userLoginState.subscribe(estado=>{
-  //     if(estado){
-  //       var veces = 0;
-  //       var intentos = 10;
-  //       var i = setInterval(()=>{
-  //         if(this.auth.dataUser){
-
-  //         }
-  //       },500);
-  //     }
-  //   });
-  //  });
-  // }
-
-  enviar(){
+  //Pendiente
+  vistaPrevia(){
     
     return this.editor.getContents();
     // this.guardarArticulo(delta);
@@ -122,29 +104,34 @@ export class ArticleComponent implements OnInit {
     // this.salida.innerHTML = html ;
   }
 
+  //Recibimos el formulario
+
   guardarArticulo(form:NgForm){
-    console.log(form.value)
+    // console.log(form)
+    // console.log(this.tagify.value);
     if(form.valid){ 
       console.log("valido");
 
-      // this.newArticle.contenido = this.editor.getContents();
-      // this.newArticle.fechaPublicacion = moment().format("YYYY-MM-DD HH:mm:ss");
-      // this.newArticle.nombreArticulo = form.value.nombreArticulo;
-      // this.newArticle.tags = form.value.tags;
-      // this.newArticle.autor.nombre = this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos;
-      // this.newArticle.autor.carrera = this.getCarrer(this.auth.dataUser);
-      this.newArticle = {
-        contenido:this.editor.getContents(),
-        fechaPublicacion:moment().format("YYYY-MM-DD HH:mm:ss"),
-        nombreArticulo:form.value.nombreArticulo,
-        tags: form.value.tags.split(","),
-        autor:{
-          nombre:this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos,
-          carrera:this.getCarrer(this.auth.dataUser),
-          tipo:this.auth.dataUser.tipo
+      let articulo = this.validArticle(this.editor.getContents());
+      let tags = this.validTags(this.tagify.value);
+      if(articulo){
+        this.newArticle = {
+          contenido:articulo,
+          fechaPublicacion:moment().format("YYYY-MM-DD HH:mm:ss"),
+          nombreArticulo:form.value.nombreArticulo,
+          tags: tags,
+          autor:{
+            nombre:this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos,
+            carrera:this.getCarrer(this.auth.dataUser),
+            tipo:this.auth.dataUser.tipo
+          }
         }
+        console.log("Nuevo articulo",this.newArticle);
+      }else{
+        console.log("El articulo no es valido");
       }
-      console.log("Nuevo articulo",this.newArticle);
+      
+      
     }else{
       console.log("Error no valido");
     }
@@ -157,12 +144,41 @@ export class ArticleComponent implements OnInit {
         //Estudiantes
       name = user.carrera.abr + " en " + user.carrera.label;
     }else{
-      // Maaestro
+      // Maestro
       name = user.grado.abr + " en " + user.titulo; 
     }
     return name;
   }
 
+  //Funciones para validar elementos
+  
+  validArticle(articulo){
+    let art = []
+    art = articulo.ops;
+    console.log("Contenido",art);
+    if(art.length == 1){
+      if(art[0].insert.length > 10){
+        return art
+      }else{
+        alert("Parece ser que su articulo es demasiado corto, vamos puedes hacerlo mejor");
+        return;
+      }
+    }else if (art.length > 2){
+      return art;
+    }else{
+      return;
+    }
+
+  }
+
+  validTags(Tags){
+    if(Tags.length > 0){
+      return Tags
+    }else{
+      alert("Tus lectores no te encontraran si no pones tags.")
+      return;
+    }
+  }
 }
 
 

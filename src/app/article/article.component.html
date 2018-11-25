@@ -13,19 +13,31 @@
 
 <!-- En caso de no estar registrado -->
 <div class="nologin text-center" *ngIf="!login && !cargando">
-  <h2>Necesita estar registrado para publicar un articulo :C</h2>
+  <h2>Necesita estar registrado para publicar un articulo amigo :C</h2>
   <button class="btn btn-primary" routerLink="/registrarse">Registrarse</button>
 </div>
 
 <!-- Contenedor de la publicacion  -->
 <div class="login container-fluid bg-white" *ngIf="login && !cargando">
-<form action="">
+<form #articulo=ngForm (ngSubmit)="guardarArticulo(articulo)" validate>
 
   <div class="row ">
     <div class="col">
         <div class="col-12 p-2">
-            <input type="text" class=" tituloSize" placeholder="Ponle un nombre a tu articulo">
+            <input  type="text" class="tituloSize "  
+                    placeholder="Ponle un nombre a tu articulo"
+                    ngModel
+                    name="titulo"
+                    required
+                    #nombre="ngModel"
+                    >
         </div>
+        <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)">
+          <div [hidden]="!nombre.errors.required">
+            <p class="text-danger">¡Necesitas un titulo!</p>
+          </div>
+        </div>
+        
         <div class="col-12">
           <p class="text-muted text-left">
             <small>By {{ auth.dataUser.nombre }}</small>
@@ -35,44 +47,54 @@
   </div>
 
   <div class="row">
-      <div class="col contenido">
+      <div class="col-8 contenido ">
           <div class="container contenedor-editor">
               <div id="editor" class="bg-white">
 
               </div>
+              
           </div>
+         
       </div>
-      <div class="col-4  ajustes bg-ft-smoke p-3">
+
+      <div class="col  ajustes bg-ft-smoke p-3">
         <div class="ContenedorAjustes">
             <div class="form-group">
               <label for="">División</label>
-              <select name="" id="" class="form-control">
+              <select id="division" class="form-control" required name="division" ngModel>
                 <option value="">Seleccione una division</option>
                 <option value="{{ division.nombre }}" *ngFor="let division of uni; let i = index" (click)="changeDivision(i)"> {{ division.nombre }} </option>
               </select>
             </div>
             <div class="form-group">
                 <label for="">Carrera</label>
-                <select name="" id="" class="form-control">
+                <select name="carrera" id="carrera" class="form-control" required ngModel>
                   <option value="">Seleccione una carrera</option>
                   <option value="{{ carrera.titulo + ' ' + carrera.label }}" *ngFor="let carrera of uni[division].carreras; let i = index" > {{ carrera.abr + ' - ' + carrera.label }} </option>
                 </select>
             </div>
             <div class="form-group ">
                 <!-- Tags de Tagify -->
-                <label for="">Tags:</label>
+                <small class="text-muted">Nota: Usa palabras clave para ayudar a los lectores a ubicar mejor tu articulo</small>
+                <br>
+                <label for="" title="separa las palabras por una coma">Tags:</label>
                 <input name='tags' class='tags-selector' placeholder='Escribe algunos tags' value='' autofocus>
             </div>
-            
+            <div>
+              <button class="btn btn-primary w-100 " type="submit" [disabled]="!articulo.valid">
+                Publicar
+              </button>
+              <p>
+                  <small *ngIf="!articulo.valid">Te faltan algunos campos</small>
+              </p> 
+            </div>
         </div>
       </div>
       <div class="col-12 mt-3">
           <!-- <button class="btn btn-primary w-100" type="submit" >
               Solo guardar
           </button> -->
-          <button class="btn btn-primary w-50 " type="submit" >
-              Publicar
-          </button>
+         
       </div>
   </div>
 </form>  

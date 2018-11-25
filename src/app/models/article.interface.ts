@@ -1,7 +1,7 @@
 export interface Articulo {
     nombreArticulo:string,
     fechaPublicacion:string,
-    tags:string[],
+    tags:Tag[],
     contenido:object,
     autor:{
         nombre:string,
@@ -10,4 +10,8 @@ export interface Articulo {
         picture?:string
     }
 
+}
+
+interface Tag {
+    value:string
 }
