@@ -15,5 +15,9 @@
 }
 
 .contenido{
-    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#editor{
+    height: 430px;
 }

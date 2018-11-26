@@ -2,20 +2,23 @@
   <h1 class="text-center">Acceder</h1>
   <br>
   <div class="row">
-    <div class="col-6 m-auto">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-12 m-auto">
       <div class="container login">
           <form #login="ngForm" (ngSubmit)="iniciarSesion(login)" validate>
               <div class="form-group">
-                <!-- <label for="exampleInputEmail1">Correo:</label> -->
+               
                 <input type="email" class="form-control" placeholder="Email" name="correo" ngModel required email="true"> 
                 <!-- <small id="emailHelp" class="form-text text-muted">Inicie</small> -->
               </div>
               <div class="form-group">
-                <!-- <label for="exampleInputPassword1">Contraseña:</label> -->
+                
                 <input type="password" class="form-control" placeholder="Contraseña" name="pass" ngModel required>
               </div>
               
-              <button type="submit" class="btn btn-primary w-100" [disabled]="!login.valid">Iniciar sesión</button>
+              <button type="submit" class="btn btn-primary w-100" [disabled]="!login.valid">
+                <span *ngIf="!loginStatus">Iniciar sesión</span>
+                <span *ngIf="loginStatus"><i class="fas fa-circle-notch loadingItem"></i> Conectando.. </span>
+              </button>
             </form> 
             <!-- <button class="btn btn-danger" (click)="salir()">Matar session</button> -->
       </div>

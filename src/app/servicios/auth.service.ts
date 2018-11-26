@@ -23,23 +23,35 @@ export class AuthService {
   constructor(public router: Router,
               public _firebaseAuth:AngularFireAuth,
               public db:AngularFirestore) {
-
+   
     this.userLoginState = _firebaseAuth.authState;
+     //Verificamos si hay un usuario en session activa
     this.userLoginState.subscribe(user=>{
       if(user){ 
+         //Si hay, hacemos una consulta de sus datos
         this.UserDocument =  this.db.doc<Usuario>("usuarios/"+user.uid);
         this.userObservador = this.UserDocument.valueChanges();
+        // y los guardamos en el observable de data user
         this.userObservador.subscribe(u => {
           this.dataUser = u
           console.log("User", this.dataUser)
         })
         
       }else{
+        //de lo contrario, reseteamos la variable a indefinido, para evitar que se queden datos importantes
         this.dataUser = undefined;
         // console.log("No tienes session iniciada");
       }
     });
   }
+
+/**
+ * Registramos un usuario nuevo mediante los metodos del la variable global de firebase
+ * @param email El nuevo email a registrar
+ * @param pass La contraseña, la cual no almacenaremos
+ * @param newUser  el objeto usuario a guardar
+ */
+
   public singIn(email,pass,newUser:Usuario){
     firebase.auth().createUserWithEmailAndPassword(email,pass).then((UserCreate)=>{
       console.log("Usuario Creado",UserCreate);
@@ -53,10 +65,14 @@ export class AuthService {
       if(errorCode == "auth/email-already-in-use"){
         alert('El correo: "'+ newUser.email +'" ya se uso');
       }
-      
-
     });
   }
+
+  /**
+   * Guardamos el usuario en la base de dados de CloudFirebase
+   * @param newUser El objeto usuario a guardar
+   */
+
   private RegistrarFirebase(newUser:Usuario){
     this.userCollection = this.db.collection<Usuario>('usuarios');
     console.log(newUser);
@@ -67,14 +83,22 @@ export class AuthService {
       });
   }
 
-
-  public login(email,pass): void {
-    firebase.auth().signInWithEmailAndPassword(email,pass).then(logueado=>{
-      console.log("Usuario Reconocido",logueado);
-      
-    }).catch(err=>{
-      console.log("Hubo un error",err);
-    });
+  /**
+   * Logueamos la session mediante una funcion de firebase
+   * @param email el email de la cuenta
+   * @param pass  la contraseña
+   */
+  public login(email,pass){
+    return new Promise( (resolve,reject)=>{
+      firebase.auth().signInWithEmailAndPassword(email,pass).then(logueado=>{
+        console.log("Usuario Reconocido",logueado);
+        resolve(true);
+      }).catch(err=>{
+        reject(err);
+        console.log("Hubo un error",err);
+      });
+    })
+    
   }
 
   public signOut(){

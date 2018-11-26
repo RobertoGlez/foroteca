@@ -18,7 +18,7 @@
 </div>
 
 <!-- Contenedor de la publicacion  -->
-<div class="login container-fluid bg-white" *ngIf="login && !cargando">
+<div class="login container-fluid bg-white" *ngIf="login && !cargando" unload="salirSinGuardar()">
 <form #articulo=ngForm (ngSubmit)="guardarArticulo(articulo)" validate>
 
   <div class="row ">
@@ -78,23 +78,27 @@
                 <small class="text-muted">Nota: Usa palabras clave para ayudar a los lectores a ubicar mejor tu articulo</small>
                 <br>
                 <label for="" title="separa las palabras por una coma">Tags:</label>
-                <input name='tags' class='tags-selector' placeholder='Escribe algunos tags' value='' autofocus>
+                <input name='tags' id="tags" class='tags-selector' placeholder='Escribe algunos tags' value='' >
             </div>
             <div>
+              <!-- <button class="btn btn-secondary w-100 mb-2">
+                Vista previa de tu articulo
+              </button> -->
               <button class="btn btn-primary w-100 " type="submit" [disabled]="!articulo.valid">
-                Publicar
+                <span *ngIf="!publicando">Publicar</span>
+                <span *ngIf="publicando">
+                    <i class="fas fa-circle-notch loadingItem"></i> Publicando...  
+                </span>
               </button>
-              <p>
+
+              <p class="text-muted">
                   <small *ngIf="!articulo.valid">Te faltan algunos campos</small>
               </p> 
             </div>
         </div>
       </div>
       <div class="col-12 mt-3">
-          <!-- <button class="btn btn-primary w-100" type="submit" >
-              Solo guardar
-          </button> -->
-         
+         <!-- Espacio en blando para el borde de abajo -->
       </div>
   </div>
 </form>  

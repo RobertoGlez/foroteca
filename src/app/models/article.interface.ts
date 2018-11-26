@@ -1,8 +1,9 @@
 export interface Articulo {
+    idArticulo?:string
     nombreArticulo:string,
     fechaPublicacion:string,
     tags:Tag[],
-    contenido:object,
+    contenido:any,
     autor:{
         nombre:string,
         carrera:string,
