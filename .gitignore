@@ -34,3 +34,4 @@ yarn-error.log
 #extra-files
 environment.ts
 environment.prod.ts
+environment.prod.*
