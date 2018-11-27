@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import { WHITELIST, BLACKLIST } from '../core/editor/whitelist-tags';
 import { OPTIONS } from '../core/editor/configuration-editor';
 import { universidad } from '../core/universidad.carreras'
-
+import { DATOS } from '../core/static-data';
 // import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';npm install quill-delta-to-html
 import { Formatter } from 'delta-transform-html'
 
@@ -121,7 +121,7 @@ export class ArticleComponent implements OnInit {
   //Recibimos el formulario
 
   guardarArticulo(form:NgForm){
-    // console.log(form)
+    console.log(form.value)
     // console.log(this.tagify.value);
     if(form.valid){ 
       console.log("valido");
@@ -138,12 +138,19 @@ export class ArticleComponent implements OnInit {
           tags: tags,
           autor:{
             nombre:this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos,
-            carrera:this.getCarrer(this.auth.dataUser),
-            tipo:this.auth.dataUser.tipo
+            carrera:this.auth.dataUser.titulo,
+            tipo:this.auth.dataUser.tipo,
+            grado:this.auth.dataUser.grado,
+            picture:this.getPicture(this.auth.dataUser)
+          },
+          categoria: {
+            division: form.value.division,
+            carrera: form.value.carrera
           }
+          
         }
         //guardar en base de datos
-        console.log("Nuevo articulo",this.newArticle)
+        console.log("Nuevo articulo",this.newArticle);
         this.articleService.addArticle(this.newArticle).then(subido=>{
           console.log("Se subio correctamente");
           this.publicando = false;
@@ -157,7 +164,7 @@ export class ArticleComponent implements OnInit {
           });
         }).catch(error=>{
           console.error("Hubo un error", error)
-          swal("Hubo un errror!");
+          swal("Hubo un errror!",error);
         });
         
       }else{
@@ -171,16 +178,16 @@ export class ArticleComponent implements OnInit {
       
     }
 
-  getCarrer(user:Usuario){
-    var name = "";
-    if(user.tipo == "estudiante"){
-        //Estudiantes
-      name = user.carrera.abr + " en " + user.carrera.label;
+  getPicture(user:Usuario){
+    var picture = "";
+    if(user.picture == undefined || user.picture == null){
+     
+      picture = DATOS.porfilePictureDefault.user;
     }else{
-      // Maestro
-      name = user.grado.abr + " en " + user.titulo; 
+     
+      picture = user.picture; 
     }
-    return name;
+    return picture;
   }
 
   //Funciones para validar elementos

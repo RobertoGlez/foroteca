@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
-
+//tools
+import { NgxContentLoadingModule } from 'ngx-content-loading';
 //Componentes
 import { AppComponent } from './app.component';
 
@@ -33,6 +34,9 @@ import { ThemeComponent } from './theme/theme.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 
+//Pipes
+import { TimeAgo } from './pipes/timeago.pipe'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +48,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     ArticleComponent,
     ThemeComponent,
     NopagefoundComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    TimeAgo
   ],
   imports: [
     BrowserModule,
@@ -54,7 +59,8 @@ import { UsuarioComponent } from './usuario/usuario.component';
     HttpClientModule,
     FormsModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NgxContentLoadingModule 
     
   ],
   providers: [

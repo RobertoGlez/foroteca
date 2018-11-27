@@ -29,37 +29,81 @@
     <!-- ---------ARTICULOS RECIENTES--------- -->
     <div class="row">
         <div class="col-8 bg-white">
-            <div class="row bg-white ml-2 mr-2 mt-4 sombras" *ngFor="let articulo of articulos">
+          
+            <div class="row  bg-white ml-2 mr-2 my-4  sombras" *ngIf="cargando">
+                <div class="col">
+                    <div class="contenedor p-3" >
+                            <ngx-content-loading  >
+                                    <svg:g ngx-facebook-preset></svg:g>
+                            </ngx-content-loading>
+                    </div>
+                    
+                    <!-- <h4>
+                        <p class="text-center text-muted">
+                            <i class="fas fa-circle-notch loadingItem"></i> Cargando articulos..
+                        </p>
+                    </h4>     -->
+                </div>
+            </div>
+            <div class="row" *ngIf="!cargando && empty">
+                <div class="col p-4 text-center">
+                    <h5 class="text-muted">
+                        <p>
+                                <i class="fas fa-book-open"></i> No se encontraron articulos actualmente :(
+                        </p> 
+                    </h5>
+                    <p>
+                        <small class="text-muted">
+                            No te quedes ahi!, Se el primero en escribir un articulo
+                        </small>
+                    </p>
+                    <button class="btn btn-primary " routerLink="/editor-articulo">
+                        Escribir nuevo articulo ahora <i class="fas fa-pen-nib"></i>
+                    </button> 
+                   
+                </div> 
+               
+            </div> 
+            <!-- articulos for    -->
+            <div class="row bg-white ml-2 mr-2 my-4  sombras" *ngFor="let articulo of articulos">
                 <div class="col">
                     <div class="row mt-2">
                         <div class="col-2">
                             <a class="ctm-a" href="#">
-                                <img class="ctm-img mt-4" src="assets/img/ex1.jpg">
+                                <img class="ctm-img mt-4" [src]="articulo.autor.picture">
                             </a>
                         </div>
                         <div class="col-9">
                             <div class="row justify-content-center">
                                 <a class="ctm-a" href="#">
-                                    <h3>Mejorar el aprendizaje</h3>
+                                    <h3>{{ articulo.nombreArticulo }}</h3>
                                 </a>
                             </div>
                             <div class="row">
                                 <a class="ctm-a" href="#">
-                                    <p class="foroteca-primary">TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
+                                    <p class="foroteca-primary">Division de {{ articulo.categoria.division }} / {{ articulo.categoria.carrera }}</p>
                                 </a>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">
                                         <a class="ctm-a" href="">
-                                            <p class="text-muted">Prof. Margarita Mendoza Cruz</p>
+                                            <p class="text-muted">
+                                                <span class="badge badge-primary">
+                                                        {{ articulo.autor.tipo | titlecase }} 
+                                                </span>
+                                                {{ articulo.autor.grado.abr }}. en {{ articulo.autor.carrera  }}  
+                                                {{ articulo.autor.nombre }}
+                                            </p>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="row justify-content-end">
                                         <a class="ctm-a" href="">
-                                            <p class="text-muted">Hace 20 minutos</p>
+                                            <p class="text-muted">
+                                                {{ articulo.fechaPublicacion | timeago:'es'}}
+                                            </p>
                                         </a>
                                     </div>
                                 </div>
@@ -73,20 +117,29 @@
                     </div>
                     <div class="row">
                         <div class="col bg-ft-primary">
-                            <div class="row mt-1 mb-1">
-                                <div class="col-1">
-                                    <i class="fas fa-tag"></i>
-                                </div>
-                                <div class="col-11">
-                                    <a class="ctm-a" href="#">
-                                        <p class="ctm-p-m text-white">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
-                                    </a>
+                            <div class="row mt-2 mb-1">
+                                <div class="col-12">
+                                    
+                                        <p class="ctm-p-m text-white">
+                                            <i class="fas fa-tag mr-1"></i>
+                                            <span *ngFor="let tag of articulo.tags; let itag = index;">
+                                                <span *ngIf="itag != 0">
+                                                ,
+                                                </span>
+                                                <a href="#color" class="link-foroteca">
+                                                   {{ tag.value }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                   
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- // articulos for    -->
         </div>
         <!-- ---------USUARIOS--------- -->
         <div class="col-3 ml-4 ctm-p-m bg-white">

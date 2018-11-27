@@ -1,10 +1,10 @@
 export interface Usuario{
-    // picture:string
+    picture?:string
     uid?:string;
     nombre:string;
     apellidos:string;
     email:string;
-    // password:string;
+    matricula?:string;
     tipo:string; //0 maestro, 1 usuario
     division:string;
     //if alumno

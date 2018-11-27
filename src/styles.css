@@ -62,8 +62,30 @@
 .loadingItem {
     animation: spin 1s linear infinite;
 }
-
+.loadingItem-fast {
+    animation: spin 0.5s linear infinite;
+}
+.loadingItem-slowly {
+    animation: spin 2s linear infinite;
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+.link-foroteca{
+    color:white
+}
+.link-foroteca:hover{
+    color:whitesmoke;
+    text-decoration: underline;
+}
+.link-foroteca:link{
+    color:white
+}
+.link-foroteca:active{
+    color:blue;
+}
+.link-foroteca:visited{
+    color:purple;
 }
