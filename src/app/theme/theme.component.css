@@ -2,8 +2,12 @@
     background-image: url('../../assets/img/usuario-wallpaper.jpg');
     background-size: cover;
     height: 500px;
+    /* opacity: 0.8; */
+    
 }
-
+.black{
+    /* background-color: black; */
+}
 .ctm-mrg {
     margin-top: 100px;
 }

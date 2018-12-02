@@ -7,8 +7,8 @@ export interface Articulo {
     contenido:any,
     autor:{
         nombre:string,
-        grado:Grade,
-        carrera:string,
+        grado?:Grade,
+        carrera?:string,
         tipo:string,
         picture?:string
     }

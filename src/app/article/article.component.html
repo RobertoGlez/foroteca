@@ -11,14 +11,26 @@
   </div>
 </div>
 
+<div *ngIf="estudiante">
+  <div class="w-50 m-auto">
+      <h2 class="text-center">
+          Lo sentimos tanto :(
+      </h2>
+      <p class="text-muted">
+        Actualmente solo los profesores pueden publicar articulos, estamos trabajando duro para integrar que los estudiantes puedan publicar y que los profesores validen el material
+      </p>
+  </div>
+  
+</div>
+
 <!-- En caso de no estar registrado -->
-<div class="nologin text-center" *ngIf="!login && !cargando">
+<div class="nologin text-center" *ngIf="!login && !cargando ">
   <h2>Necesita estar registrado para publicar un articulo amigo :C</h2>
   <button class="btn btn-primary" routerLink="/registrarse">Registrarse</button>
 </div>
 
 <!-- Contenedor de la publicacion  -->
-<div class="login container-fluid bg-white" *ngIf="login && !cargando" unload="salirSinGuardar()">
+<div class="login container-fluid bg-white" *ngIf="login && !cargando && !estudiante" unload="salirSinGuardar()">
 <form #articulo=ngForm (ngSubmit)="guardarArticulo(articulo)" validate>
 
   <div class="row ">

@@ -31,6 +31,7 @@ export class ArticleComponent implements OnInit {
   public cargando = true;
   public login = false;
   public publicando =  false;
+  public estudiante = false;
 
   //Variables de las carreras
   public uni = universidad;
@@ -77,6 +78,10 @@ export class ArticleComponent implements OnInit {
 
     this.auth.LoginStatus().then(login=>{
       // console.log("Se encontro usuario",login);
+      if(this.auth.dataUser.tipo == 'estudiante'){
+        this.estudiante = true;
+        console.log("Eres estudiante")
+      }
       this.login = true;
       this.cargando = false;
       
@@ -130,6 +135,9 @@ export class ArticleComponent implements OnInit {
       let tags = this.validTags(this.tagify.value);
 
       if(articulo){
+      
+
+        
         this.publicando = true;
         this.newArticle = {
           contenido:articulo,
@@ -138,9 +146,7 @@ export class ArticleComponent implements OnInit {
           tags: tags,
           autor:{
             nombre:this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos,
-            carrera:this.auth.dataUser.titulo,
             tipo:this.auth.dataUser.tipo,
-            grado:this.auth.dataUser.grado,
             picture:this.getPicture(this.auth.dataUser)
           },
           categoria: {

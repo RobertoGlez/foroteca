@@ -1,39 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-// import { AngularFirestore } from '@angular/fire/firestore'
-import { Observable } from 'rxjs';
-import * as Quill from 'quill';
-import { OPTIONS } from '../core/editor/configuration-editor';
+import { AuthService } from '../servicios/auth.service';
 import { SigninService } from '../servicios/signin.service'
 import { NgForm } from '@angular/forms'; 
 import { Usuario } from '../models/usuarios.interface';
 import * as $ from 'jquery';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  
+  public login = false;
+  public cargando = true;
+  public subiendo = false;
+  public usuario:Usuario;
   public rol = {
     estudiante:true,
     maestro:false
   }
   public op = {
-    perfil:false,
+    perfil:true,
     articulos:false,
-    bio:true
+    bio:false
   }
 
   public articulos = [1,2,3,4,5,6,7,8,9]
   
-  constructor(public _regService:SigninService) { 
+  constructor(public _auth:AuthService,) { 
   
   }
 
 
   ngOnInit() {
-    
+    this._auth.LoginStatus().then((login)=>{
+      this.cargando = false;
+      this.login = true;
+      this.usuario = this._auth.dataUser;
+    }).catch(err=>{
+      this.login = false;
+      this.cargando = false;
+      console.log("Hubo un error:",err);
+    });
   }
 
   changeRol(type:number){
@@ -73,12 +81,25 @@ export class DashboardComponent implements OnInit {
     console.log("Roles", this.rol);
   }
   registrarUsuario(form:NgForm){
+    this.subiendo = true;
     console.log(form.value);
-    console.log(form.valid);
+    console.log(this.usuario);
+
+    if(form.valid){
+      console.log("enviando...")
+      this._auth.UpdateInfo(this.usuario).then(newDoc=>{
+        console.log(newDoc)
+        this.subiendo = false;
+        swal("Informacion Actualizada correctamente");
+      }).catch(error=>{
+        console.log("Error ",error);
+        swal("Hubo un error al actualizar!")
+      })
+    }
   }
 
-  updateBio(form:NgForm){
-    console.log(form.value);
-    console.log(form.valid);
-  }
+  // updateBio(form:NgForm){
+  //   console.log(form.value);
+  //   console.log(form.valid);
+  // }
 }

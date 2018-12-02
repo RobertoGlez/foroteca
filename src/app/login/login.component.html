@@ -20,6 +20,14 @@
                 <span *ngIf="loginStatus"><i class="fas fa-circle-notch loadingItem"></i> Conectando.. </span>
               </button>
             </form> 
+
+            <div *ngIf="errorLogin" class="mt-2">
+              <p>
+                <small class="text-danger"> 
+                  Error {{ errorMensaje.tipo }}: {{ errorMensaje.mensaje }} 
+                </small>
+              </p>
+            </div>
             <!-- <button class="btn btn-danger" (click)="salir()">Matar session</button> -->
       </div>
     </div>

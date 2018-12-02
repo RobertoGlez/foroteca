@@ -6,6 +6,7 @@ import { AngularFireAuth  } from 'angularfire2/auth';
 import { Usuario } from '../models/usuarios.interface';
 // import 'rxjs/operators/switchMap';
 import * as firebase from 'firebase/app';
+import * as moment from 'moment'
 // import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFirestore,AngularFirestoreCollection,AngularFirestoreDocument } from '@angular/fire/firestore';
 // (window as any).global = window;
@@ -47,25 +48,61 @@ export class AuthService {
 
 /**
  * Registramos un usuario nuevo mediante los metodos del la variable global de firebase
+ * es importante tener en cuenta que retornamos una promesa con el ID del usuario en caso 
+ * de que haya registrado correctamente y un objeto de error en caso de que no
  * @param email El nuevo email a registrar
  * @param pass La contraseña, la cual no almacenaremos
  * @param newUser  el objeto usuario a guardar
  */
 
   public singIn(email,pass,newUser:Usuario){
-    firebase.auth().createUserWithEmailAndPassword(email,pass).then((UserCreate)=>{
-      console.log("Usuario Creado",UserCreate);
-      newUser.uid = UserCreate.user.uid;
-      this.RegistrarFirebase(newUser);
-    }).catch(error=>{
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log("Codigo de error:",errorCode);
-      console.log("Mensaje:", errorMessage);
-      if(errorCode == "auth/email-already-in-use"){
-        alert('El correo: "'+ newUser.email +'" ya se uso');
-      }
-    });
+    return new Promise((resolve,reject)=>{
+      firebase.auth().createUserWithEmailAndPassword(email,pass).then((UserCreate)=>{
+        console.log("Usuario Creado",UserCreate);
+        newUser.uid = UserCreate.user.uid;
+        this.RegistrarFirebase(newUser).then(registrado=>{
+          resolve({
+            error:false,
+            mensaje:"Usuario Registrado",
+            uid:newUser.uid
+          });
+        }).catch(err=>{
+          reject({
+            error:true,
+            mensaje:"Error al Registrar usuario",
+            errorType:err
+          })
+        });
+      }).catch(error=>{
+
+        var Err = {
+          error:true,
+          code:error.code,
+          mensaje:error.message,
+          MensajeUsuario:"Ningun error"
+        }
+        var usermessage;
+        console.log("Codigo de error:",Err.code);
+        console.log("Mensaje:", Err.mensaje);
+
+        if(Err.code == "auth/email-already-in-use"){
+          usermessage = 'El correo: "'+ newUser.email +'" ya se uso';
+        }
+
+        //Estos errores ya los manejo en frontend con los componentes, para eviarlos
+        //esto es solo un plan B en caso de que no llegaran a funcionar o los desabilitaran
+        if(Err.code == "auth/invalid-email"){
+          usermessage = "El correo electronico es invalido";
+        }
+        if(Err.code == "auth/weak-password"){
+          usermessage = "La contraseña es demasiado corta";
+        }
+        if(Err.code == "auth/operation-not-allowedl"){
+          usermessage = "Operacion no permitida";
+        }
+        Err.MensajeUsuario = usermessage;
+      });
+    }); 
   }
 
   /**
@@ -76,11 +113,7 @@ export class AuthService {
   private RegistrarFirebase(newUser:Usuario){
     this.userCollection = this.db.collection<Usuario>('usuarios');
     console.log(newUser);
-    this.userCollection.doc(newUser.uid).set(newUser).then(usuario=>{
-        console.log('Usuario Insertado!');
-      }).catch(err=>{
-        console.log("Hubo un error",err);
-      });
+    return this.userCollection.doc(newUser.uid).set(newUser)
   }
 
   /**
@@ -91,7 +124,8 @@ export class AuthService {
   public login(email,pass){
     return new Promise( (resolve,reject)=>{
       firebase.auth().signInWithEmailAndPassword(email,pass).then(logueado=>{
-        console.log("Usuario Reconocido",logueado);
+        console.log("Usuario Reconocido",logueado.user.uid);
+        this.UpdateLastConecction();
         resolve(true);
       }).catch(err=>{
         reject(err);
@@ -129,7 +163,7 @@ export class AuthService {
             }
             if(veces > intentos){
               clearImmediate(intervalo)
-              reject(" No se encontro datos del usuario");
+              reject("No se encontro datos del usuario");
             }
           },timeInterval_);
         }else{
@@ -137,6 +171,22 @@ export class AuthService {
         }
       });
     });
+  }
+
+  public UpdateInfo(newUser:Usuario){
+    this.UserDocument = this.db.collection('usuarios').doc(newUser.uid);
+    return this.UserDocument.update(newUser)
+  }
+  public UpdateLastConecction(){
+    console.log('actualizando conexion');
+    let newConecction = moment().format("YYYY-MM-DD HH:mm:ss");
+    this.UserDocument.update({
+      fechaConexion:newConecction
+    }).then(actualizado=>{
+      console.log("Actualizado con exito",actualizado);
+    }).catch(err=>{
+      console.error("Hubo un error al actualizar",err);
+    })
   }
 
 }

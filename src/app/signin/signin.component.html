@@ -1,16 +1,67 @@
 <div class="conteiner">
+
   <h2 class="text-center">Registrate</h2>
   <h6 class="text-center text-muted">Rellena el formulario con tus datos</h6>
   <div class="container">
-    <div class="row">
+    <!-- <div class="row" class="fotoPerfil w-100" *ngIf="">
+
+
+            <div class="col-12">
+                <label for="">Foto de perfil</label>        
+            </div>
+
+            <div class="col-3">
+                    <div class="vistaPrevia" >
+                            <img id="output" src="assets/img/perfil-image/avatar-no-photo.png" alt="" class="img-fluid img-thumbnail">
+                    </div>
+            </div>
+
+            <div class="col-5">
+                <div class="">
+                        <div class="top">
+                            <p class="text-muted">
+                                    <small>
+                                        <strong>Nota:</strong> 
+                                        La foto de perfil es muy importante para que los usuarios te 
+                                        reconozcan, te recomendamos usar una foto real
+                                    </small>
+                            </p>
+                        </div>
+                        <div class="middle">
+                            <p>
+                                <span class="badge badge-warning"> 
+                                    No tiene ninguna foto subida
+                                </span>
+                            </p>
+                        </div>
+                        <div class="bottom">
+                            <button class="btn btn-secondary btn-block">
+                                    Subir foto de perfil
+                            </button>
+                            <br>
+                        </div>
+                </div>
+        </div>
+    </div> -->
+
+
+    <div class="row" > 
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 m-auto" >
             <form  #usuario="ngForm" (ngSubmit)="registrarUsuario(usuario)" validate>
                 <div class="container">
                 <div class="row">
-                    <!-- <div class="form-group col-12">
+                    <div class="form-group col-12">
                         <label for="">Matricula *</label>
-                        <input type="text" class="form-control" id="matricula" placeholder="Matricula" ngModel>
-                    </div> -->
+                        <input type="text" class="form-control" name="matricula" placeholder="Matricula" ngModel #matricula="ngModel" required>
+                        <div *ngIf="matricula.errors && (matricula.dirty || matricula.touched)" class="">
+                                <div [hidden]="!matricula.errors.required">
+                                  <p class="text-danger">¡Necesitas una matricula!</p>
+                                </div>
+                                <div hidden>
+                                    <p class="text-danger">Matricula invalida</p>
+                                </div>
+                        </div>
+                    </div>
                     <div class="col-md-6 col-sm-12">
                         <label for="">Nombre</label>
                         <input type="text" 
@@ -277,7 +328,8 @@
                     </div>
                     
                 </div>
-                <br>
+                
+                
             <!-- /Contenedor maestros -->
                 <!-- <div class="row my-3">
                         <div class="col m-auto ">

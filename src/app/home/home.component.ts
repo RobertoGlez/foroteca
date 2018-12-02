@@ -8,6 +8,7 @@ import { HomeService } from '../servicios/home.service';
 import { Articulo } from '../models/article.interface';
 //Otros
 import { TimeAgo } from '../pipes/timeago.pipe';
+import { Usuario } from '../models/usuarios.interface';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +16,12 @@ import { TimeAgo } from '../pipes/timeago.pipe';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public cargando = true;
-  public empty = false;
-  public articulos:Articulo[] = undefined;
-
+  public cargandoArticulos = true;
+  public cargandoUsuarios = true;
+  public emptyArticulos = false;
+  public emptyUsuarios = false;
+  public articulos:Articulo[];
+  public usuarios:Usuario[];
   constructor(public homeService:HomeService) { }
 
   ngOnInit() {
@@ -26,13 +29,24 @@ export class HomeComponent implements OnInit {
     this.homeService.getLastArticles().subscribe(articulos=>{
       console.log("Articulos", articulos);
       if(articulos.length > 0){
-        this.empty = false;
+        this.emptyArticulos = false;
         this.articulos = articulos;
       }else{
-        this.empty = true;
+        this.emptyArticulos = true;
       }
-      this.cargando = false;
+      this.cargandoArticulos = false;
     });
+
+    this.homeService.getLastUsers().subscribe(usuarios=>{
+      console.log("Usuarios >", usuarios);
+      if(usuarios.length > 0){
+        this.emptyUsuarios = false;
+        this.usuarios = usuarios;
+      }else{
+        this.emptyUsuarios = true;
+      }
+      this.cargandoUsuarios = false;
+    })
   }
 
 }

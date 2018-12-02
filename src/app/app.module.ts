@@ -20,10 +20,13 @@ import { SigninComponent } from './signin/signin.component';
 import { AuthService } from './servicios/auth.service';
 
 //Firebase
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage'
+
+
 //Enviroment
 import { environment } from '../environments/environment';
 
@@ -56,6 +59,7 @@ import { TimeAgo } from './pipes/timeago.pipe'
     APP_ROUTING,
     AngularFireModule.initializeApp(environment.firebase), //For firebase config
     AngularFireDatabaseModule, // for database
+    AngularFireStorageModule,
     HttpClientModule,
     FormsModule,
     AngularFireAuthModule,

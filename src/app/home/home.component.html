@@ -1,4 +1,4 @@
-<div class="contenedor">
+<div class="contenedor mt-2">
     <!-- ---------BUSCADOR--------- -->
     <div class="row">
         <div class="col-5">
@@ -10,9 +10,9 @@
             </form>
         </div>
         <div class="col-1 d-flex">
-            <button class="btn d-flex" type="button"> 
+            <!-- <button class="btn d-flex" type="button"> 
                     <i class="ml-2 mr-2 fas fa-sliders-h"></i>                
-            </button>
+            </button> -->
         </div>
     </div>
     <br>
@@ -23,14 +23,14 @@
             <h1>Recientes</h1>
         </div>
         <div class="col-4 ctm-p-m">
-            <h1>Usuarios</h1>
+            <h1>Ultimos Usuarios</h1>
         </div>
     </div>
     <!-- ---------ARTICULOS RECIENTES--------- -->
     <div class="row">
         <div class="col-8 bg-white">
           
-            <div class="row  bg-white ml-2 mr-2 my-4  sombras" *ngIf="cargando">
+            <div class="row  bg-white ml-2 mr-2 my-4  sombras" *ngIf="cargandoArticulos">
                 <div class="col">
                     <div class="contenedor p-3" >
                             <ngx-content-loading  >
@@ -45,7 +45,7 @@
                     </h4>     -->
                 </div>
             </div>
-            <div class="row" *ngIf="!cargando && empty">
+            <div class="row" *ngIf="!cargandoArticulos && emptyArticulos">
                 <div class="col p-4 text-center">
                     <h5 class="text-muted">
                         <p>
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-9">
                             <div class="row justify-content-center">
-                                <a class="ctm-a" href="#">
+                                <a class="ctm-a" [routerLink]="['/tema', articulo.idArticulo]">
                                     <h3>{{ articulo.nombreArticulo }}</h3>
                                 </a>
                             </div>
@@ -92,7 +92,7 @@
                                                 <span class="badge badge-primary">
                                                         {{ articulo.autor.tipo | titlecase }} 
                                                 </span>
-                                                {{ articulo.autor.grado.abr }}. en {{ articulo.autor.carrera  }}  
+                                                <!-- {{ articulo.autor.grado.abr }}. en {{ articulo.autor.carrera  }}   -->
                                                 {{ articulo.autor.nombre }}
                                             </p>
                                         </a>
@@ -110,9 +110,9 @@
                             </div>
                         </div>
                         <div class="col-1">
-                            <button class="btn bg-white" type="button"> 
+                            <!-- <button class="btn bg-white" type="button"> 
                                 <i class="foroteca-primary fas fa-angle-down"></i>
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div class="row">
@@ -142,19 +142,37 @@
             <!-- // articulos for    -->
         </div>
         <!-- ---------USUARIOS--------- -->
+        <div class="cargando col-3 ml-4 ctm-p-m bg-white" *ngIf="cargandoUsuarios">
+                <div class="contenedor p-1" >
+                        <ngx-content-loading >
+                                <svg:g ngx-facebook-preset></svg:g>
+                        </ngx-content-loading>
+                </div>
+        </div>
+        
+        <div class="vacios col-3 ml-4 ctm-p-m bg-white" *ngIf="!cargandoUsuarios && emptyUsuarios">
+            <p class="text-center text-muted p-3">
+                    No hay usuarios recientes
+            </p>   
+            
+        </div>
+
         <div class="col-3 ml-4 ctm-p-m bg-white">
-            <div class="row bg-primary mt-3 ml-2 mr-2" *ngFor="let articulo of articulos">
+            <div class="row bg-primary mt-3 ml-2 mr-2" *ngFor="let usuario of usuarios">
                 <div class="col-3 ctm-p-m">
                     <a class="ctm-a" href="#">
-                        <img class="ctm-img2 mt-1 mb-1 ml-2" src="assets/img/ex1.jpg">
+                        <img class="ctm-img2 mt-1 mb-1 ml-2" src="{{usuario.picture}}">
                     </a>
                 </div>
                 <div class="col">
                     <div class="row mt-3">
                         <div class="col">
                             <a class="ctm-a" href="#">
-                                <h5>Alumno Fulanito Pérez</h5>
+                                <h5> {{ usuario.nombre }} {{ usuario.apellidos }} </h5>
                             </a>
+                            <small>
+                                {{ usuario.fechaConexion | timeago:'es' }}
+                            </small>
                         </div>
                     </div>
                 </div>

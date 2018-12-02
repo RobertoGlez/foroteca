@@ -20,5 +20,8 @@ export interface Usuario{
         titulo:string,
     };
     titulo?:string;
+    descripcion?:string,
+    fechaRegistro?:string,
+    fechaConexion?:string
 }
 

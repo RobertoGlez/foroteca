@@ -1,20 +1,44 @@
-<div class="contenedor">
+<div class="cargando" *ngIf="cargando">
+    <div class="login m-auto w-50">
+            <p class="text-center text-muted">
+                    Cargando Información..
+            </p>
+            <p class="text-center display-4 text-muted" >
+                <i class="fas fa-circle-notch loadingItem"></i>
+            </p>
+            
+    </div>
+</div>
+<div *ngIf="!login && !cargando" class="text-center">
+    <h4>
+         No ha iniciado session
+    </h4>
+</div>
+<div class="contenedor"  *ngIf="!cargando && login">
     <hr>
     <div class="row bg-white">
         <div class="col-3 bg-ft-primary">
             <div class="row">
-                <img src="assets/img/ex1.jpg" class="ctm-img">
+                <div class="col-12">
+                        <img src="{{ usuario.picture }}" class="ctm-img">
+                </div>
+                <div class="col m-auto text-center">
+                    <!-- <button class="btn btn-primary btn-sm">
+                        Subir nueva foto
+                    </button> -->
+                </div>
             </div>
+
             <div class="row">
                 <div class="col-12">
-                    <h5 class="text-center">David Montores Escalante</h5>
+                    <h5 class="text-center">{{ usuario.nombre }} {{ usuario.apellidos }}</h5>
                 </div>
                 <div class="col-12">
-                    <h5 class="text-center">Estudiante</h5>
+                    <h5 class="text-center">{{ usuario.tipo | titlecase}}</h5>
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <!-- <div class="row">
                 <button class="btn-outline-light ctm-btn" name="op" value="articulos" (click)="changeOP(0)">
                     <div class="row ml-2 mr-2">
                         <div class="col-1">
@@ -25,8 +49,8 @@
                         </div>
                     </div>
                 </button>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <button class="btn-outline-light ctm-btn" name="op" value="perfil" (click)="changeOP(1)">
                     <div class="row ml-2 mr-2">
                         <div class="col-1">
@@ -37,8 +61,8 @@
                         </div>
                     </div>
                 </button>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <button class="btn-outline-light ctm-btn" name="op" value="bio" (click)="changeOP(2)">
                     <div class="row ml-2 mr-2">
                         <div class="col-1">
@@ -49,7 +73,7 @@
                         </div>
                     </div>
                 </button>
-            </div>
+            </div> -->
         </div>
         <div class="col-xl-9 col-lg-9 bg-white">
             <!-- ---------SECCION DE ARTICULOS--------- -->
@@ -113,6 +137,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- ---------SECCION DE PERFIL--------- -->
             <div class="conteiner animated fadeIn" *ngIf="op.perfil">
                 <br>
@@ -122,7 +147,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-11 col-xl-11 m-auto">
                             <hr>
-                            <form #usuario="ngForm" (ngSubmit)="registrarUsuario(usuario)" validate>
+                            <form #usuarioNuevo="ngForm" (ngSubmit)="registrarUsuario(usuarioNuevo)" validate>
                                 <div class="container">
                                     <div class="row">
                                         <!-- <div class="form-group col-12">
@@ -131,29 +156,28 @@
                                       </div> -->
                                         <div class="col-md-6 col-sm-12">
                                             <label for="">Nombre</label>
-                                            <input type="text" class="form-control" placeholder="Nombre" required name="nombre" ngModel>
+                                            <input type="text" class="form-control" placeholder="Nombre" required name="nombre" [(ngModel)]="usuario.nombre">
                                         </div>
 
                                         <div class=" col-md-6 col-sm-12">
                                             <label for="">Apellidos</label>
-                                            <input type="text" class="form-control" placeholder="Apellidos" required name="apellidos" ngModel>
+                                            <input type="text" class="form-control" placeholder="Apellidos" required name="apellidos" [(ngModel)]="usuario.apellidos">
                                         </div>
                                         <div class="col-12">
                                             <label for="">Correo Electronico</label>
-                                            <input type="email" class="form-control" placeholder="Correo Electronico" required name="email" ngModel>
+                                            <input type="email" class="form-control" placeholder="Correo Electronico" required name="email" [(ngModel)]="usuario.email">
                                         </div>
-                                        <div class=" col-md-6 col-sm-12">
-                                            <label for="">Contraseña</label>
-                                            <input type="password" class="form-control" placeholder="Contraseña" name="password" ngModel>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <label for="">Repetir contraseña</label>
-                                            <input type="password" class="form-control" placeholder="Repetir contraseña" name="password2" ngModel>
-                                        </div>
+                                        
                                     </div>
                                     <hr>
+                                    <div class="row">
+                                        <div class="col-12">
+                                                <label for="">Descripción</label>
+                                                <textarea required class="form-control" name="descripcion" placeholder="Háblanos de ti..." [(ngModel)]="usuario.descripcion"></textarea>
+                                        </div>
+                                    </div>
                                     <div class=" row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                        <!-- <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                             <div class="form-group">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -176,25 +200,25 @@
                                                     <label class="form-control">Maestro</label>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12">
+                                        </div> -->
+                                        <!-- <div class="col-12">
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <label class="input-group-text" for="">Division</label>
                                                 </div>
-                                                <select class="custom-select" id="division" name="division" ngModel>
+                                                <select class="custom-select" id="division" name="division" [ngModel]>
                                                   <option value="" selected >Seleccione su división...</option>
                                                   <option value="" >Turismo y hoteleria</option>
                                                   <option value="" >Tecnologias de la informacion</option>
                                               </select>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
 
                                     <!-- Contenedor estudiante -->
 
-                                    <div class="row animated fadeIn" *ngIf="rol.estudiante">
+                                    <!-- <div class="row animated fadeIn" *ngIf="rol.estudiante">
                                         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
@@ -213,7 +237,7 @@
                                                     <label class="input-group-text" for="">Cuatrimestre</label>
                                                 </div>
                                                 <select class="custom-select" id="cuatrimestre" name="cuatrimestre" ngModel>   
-                                                  <!-- <option value="" ngCheked> Seleccione su cuatrimestre </option> -->
+                                                 
                                                   <option value="1">Primer Cuatrimestre</option>
                                                   <option value="2" >Segundo Cuatrimestre</option>
                                                   <option value="3" >Tercer Cuatrimestre</option>
@@ -223,7 +247,7 @@
                                               </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
 
@@ -232,7 +256,7 @@
                                     <!-- Contenedor maestros -->
 
 
-                                    <div class="row animated fadeIn" *ngIf="rol.maestro">
+                                    <!-- <div class="row animated fadeIn" *ngIf="rol.maestro">
                                         <div class="col-12">
                                             <div class="input-group ">
                                                 <div class="input-group-prepend">
@@ -250,10 +274,10 @@
                                             <label for="">Carrera</label>
                                             <input type="text" class="form-control" placeholder="Escriba el título que posee" name="titulo" ngModel required>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- /Contenedor maestros -->
-                                    <div class="row my-3">
+                                    <!-- <div class="row my-3">
                                         <div class="col m-auto ">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="terminos" ngModel name="terminos">
@@ -263,8 +287,11 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <button type="submit" class="btn btn-primary text-center mb-3">Editar</button>
+                                    </div> -->
+                                    <button type="submit" class="btn btn-primary text-center my-2 mx-auto w-50" [disabled]="!usuarioNuevo.valid">
+                                        <span *ngIf="!subiendo">Guardar</span>
+                                        <span *ngIf="subiendo"> <i class="fas fa-circle-notch loadingItem"></i> Guardando..</span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
