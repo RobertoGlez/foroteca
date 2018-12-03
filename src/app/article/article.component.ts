@@ -151,7 +151,7 @@ export class ArticleComponent implements OnInit {
             picture:this.getPicture(this.auth.dataUser)
           },
           categoria: {
-            division: form.value.division,
+            division: this.uni[this.division].nombre,
             carrera: form.value.carrera
           }
           

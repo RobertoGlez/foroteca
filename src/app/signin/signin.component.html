@@ -231,10 +231,14 @@
                             id="division" 
                             name="division" 
                             ngModel
+                            #valor="ngModel"
                             required
+                            (change)="changeDivision(valor.value)"
                             >
                                 <option value="" selected >Seleccione su división...</option>
-                                <option value="{{ division.nombre }}" *ngFor="let division of u; let i = index" (click)="changeDivision(i)">{{ division.nombre }}</option>
+                                <option value="{{ i }}" *ngFor="let division of u; let i = index">
+                                  <span>{{ division.nombre }}</span>  
+                                </option>
                             </select> 
                         </div>
                     </div>

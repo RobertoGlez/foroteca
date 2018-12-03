@@ -4,7 +4,9 @@
     font-family: foroteca;
     src: url(assets/fonts/Familiar_Pro-Bold.otf);
 }
-
+.text-shadow-ft{
+    text-shadow: 2px 2px 15px #000;
+}
 .contenedor {
     width: 92.5%;
     margin: auto;

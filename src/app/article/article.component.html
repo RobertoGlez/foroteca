@@ -73,9 +73,9 @@
         <div class="ContenedorAjustes">
             <div class="form-group">
               <label for="">División</label>
-              <select id="division" class="form-control" required name="division" ngModel>
+              <select id="division" class="form-control" required name="division" ngModel #valor="ngModel" (change)="changeDivision(valor.value)">
                 <option value="">Seleccione una division</option>
-                <option value="{{ division.nombre }}" *ngFor="let division of uni; let i = index" (click)="changeDivision(i)"> {{ division.nombre }} </option>
+                <option value="{{ i }}" *ngFor="let division of uni; let i = index"> {{ division.nombre }} </option>
               </select>
             </div>
             <div class="form-group">

@@ -57,11 +57,13 @@ export class SigninComponent implements OnInit {
 
   changeDivision(index){
     this.divisionIndex = index;
+    // console.log("Recibio", index);
     // console.log("Index division", this.divisionIndex)
     // console.log("Obj", this.u[this.divisionIndex]);
   }
 
   changeRol(type:number){
+    console.log("evento click",type)
     if(type == 0){
       if(this.rol.maestro == false){
         this.rol.maestro = true;
@@ -87,14 +89,14 @@ export class SigninComponent implements OnInit {
         nombre:form.value.nombre,
         apellidos:form.value.apellidos,
         email:form.value.email,
-        division:form.value.division,
+        division:this.u[this.divisionIndex].nombre,
         tipo:form.value.rol,
         matricula:form.value.matricula,
         picture:DATOS.porfilePictureDefault.user,
         fechaRegistro:moment().format("YYYY-MM-DD HH:mm:ss"),
         fechaConexion:moment().format("YYYY-MM-DD HH:mm:ss")
       }
-      console.log(form.value);
+      // console.log(form.value);
       if(this.rol.estudiante){
         newUser.carrera = JSON.parse(form.value.carrera)
         newUser.cuatrimestre = form.value.cuatrimestre;
@@ -103,7 +105,7 @@ export class SigninComponent implements OnInit {
         newUser.grado = JSON.parse(form.value.grado);
         newUser.titulo = form.value.titulo
       }
-      console.log("Usuario: ",newUser);
+      // console.log("Usuario: ",newUser);
       //Pasar a la foto de usuario
       this.atuhS.singIn(newUser.email,form.value.password,newUser).then((Registro:any)=>{
         // console.log(Registro);
