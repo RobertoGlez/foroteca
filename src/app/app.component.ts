@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'app'
+  public conectado = true;
+  public OnlineStatus:Observable<boolean>;
+
+  constructor(){
+    console.log("Verificando conexion...", navigator.onLine);  
+  }
+
+  OnInit(){
+    
+  }
+
+  
 }

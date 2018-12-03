@@ -6,6 +6,7 @@ export interface Articulo {
     tags:Tag[],
     contenido:any,
     autor:{
+        uid:string,
         nombre:string,
         grado?:Grade,
         carrera?:string,

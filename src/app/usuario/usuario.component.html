@@ -1,20 +1,52 @@
-<div class="container-12 bg-ft-smoke">
+<!-- cargando -->
+<div class="cargando" *ngIf="cargandoUsuario">
+        <div class="login m-auto w-50">
+                <p class="text-center text-muted">
+                        Cargando Perfil..
+                </p>
+                <p class="text-center display-4 text-muted" >
+                    <i class="fas fa-circle-notch loadingItem"></i>
+                </p>
+        </div>
+</div>
+<!-- error -->
+<div class="error" *ngIf="errorUsuario && !cargandoUsuario">
+    <h3 class="text-muted text-center">
+        <p>
+            <i class="fas fa-user-times"></i> 
+            Error! no se pudo encontrar el usuario
+        </p>
+    </h3>
+    <p class="text-center text-muted">
+        <small>
+            El usuario <span class="text-danger">{{ uid }}</span> no existe, o fue eliminado
+        </small>
+    </p>
+    
+</div>
+
+<!-- elemento -->
+<div class="container-12 bg-ft-smoke" *ngIf="!cargandoUsuario && !errorUsuario">
     <div class="row ctm-p-m">
-        <div class="col ctm-p-m ctm-img-bg">
+        <div class="col ctm-p-m ctm-img-bg" [ngStyle]="{ 'background-image': 'url(' + covers[imageIndex] + ')'}">
             <div class="row ctm-p-m">
                 <div class="col-12 ctm-p-m d-flex justify-content-center">
                     <div class="row ctm-mrg">
                         <div class="col-12 justify-content-center d-flex">
-                            <img class="ctm-img-us" src="assets/img/ex1.jpg" alt="" width="100px" height="100px">
+                            <img class="ctm-img-us" src="{{ usuario.picture }}" alt="" width="100px" height="100px">
                         </div>
                         <div class="col-12">
-                            <h1 class="text-white text-center">David Montores Escalante</h1>
+                            <h1 class="text-white text-center">
+                                {{ usuario.nombre }} {{ usuario.apellidos }}
+                            </h1>
                         </div>
                         <div class="col-12">
-                            <h3 class="text-white text-center">Estudiante</h3>
+                            <h3 class="text-white text-center">{{ usuario.tipo | titlecase }} </h3>
                         </div>
                         <div class="col-12 mt-5 justify-content-center d-flex">
-                            <button class="btn"><i class="fas fa-edit mr-2"></i>Editar Perfil</button>
+                            <button class="btn" *ngIf="usuario.uid == authId" routerLink="/mi-panel">
+                                <i class="fas fa-edit mr-2"></i>Editar Perfil
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -35,7 +67,18 @@
                         <hr>
                         <div class="row mt-2 mb-2">
                             <div class="col">
-                                <h6 class="text-justify">Soy David Montores, soy estudiante de la Universidad y me gusta desarrollar aplicaciones web. Soy David Montores, soy estudiante de la Universidad y me gusta desarrollar aplicaciones web.</h6>
+                                <p class="text-justify" *ngIf="usuario.descripcion">
+                                    {{ usuario.descripcion }}
+                                </p>
+                                <p class="" *ngIf="!usuario.descripcion" >
+                                    <span class="text-muted">
+                                        El usuario actualmente no tiene descripción.
+                                    </span>
+                                    <br>
+                                    <a  class="btn-link" *ngIf="usuario.uid == authId" routerLink="/mi-panel">
+                                        <small>Entra aqui para actualizarlo</small>
+                                    </a>
+                                </p>
                             </div>
                         </div>
                         <hr>
@@ -44,7 +87,9 @@
                                 <h6 class="m-0">Se unió</h6>
                             </div>
                             <div class="col-8">
-                                <p class="text-right text-justify text-muted">Marzo del 2018</p>
+                                <p class="text-right text-justify text-muted">
+                                    {{ usuario.fechaRegistro | dateFt }}
+                                </p>
                             </div>
                         </div>
                         <div class="row mt-2 mb-2">
@@ -52,34 +97,50 @@
                                 <h6 class="m-0">División</h6>
                             </div>
                             <div class="col-8">
-                                <p class="text-right text-justify text-muted">Técnologias de la Información y Comunicación</p>
+                                <p class="text-right text-justify text-muted">
+                                    {{ usuario.division }}
+                                </p>
                             </div>
                         </div>
-                        <div class="row mt-2 mb-2">
+                        <div class="row mt-2 mb-2" *ngIf="usuario.tipo == 'estudiante'">
                             <div class="col-4">
                                 <h6 class="m-0">Carrera</h6>
                             </div>
                             <div class="col-8">
-                                <p class="text-right text-justify text-muted">Ingeniería en Técnologias de la Información</p>
+                                <p class="text-right text-justify text-muted">
+                                    {{ usuario.carrera.titulo }} en {{ usuario.carrera.label }}
+                                </p>
                             </div>
+                        </div>
+                        <div class="row mt-2 mb-2" *ngIf="usuario.tipo == 'maestro'">
+                                <div class="col-4">
+                                    <h6 class="m-0">Titulo</h6>
+                                </div>
+                                <div class="col-8">
+                                    <p class="text-right text-justify text-muted">
+                                        {{ usuario.grado.titulo }} en {{ usuario.titulo }}
+                                    </p>
+                                </div>
                         </div>
                         <div class="row mt-2 mb-2">
                             <div class="col-4">
-                                <h6 class="m-0">Sexo</h6>
+                                <h6 class="m-0">Ultima conexión:</h6>
                             </div>
                             <div class="col-8">
-                                <p class="text-right text-justify text-muted">Hombre</p>
+                                <p class="text-right text-justify text-muted">
+                                    {{ usuario.fechaConexion | timeago:'es' }}
+                                </p>
                             </div>
                         </div>
-                        <div class="row mt-2 mb-2">
+                        <!-- <div class="row mt-2 mb-2">
                             <div class="col-4">
                                 <h6 class="m-0">Edad</h6>
                             </div>
                             <div class="col-8">
                                 <p class="text-right text-justify text-muted">21 años</p>
                             </div>
-                        </div>
-                        <div class="row mt-2 mb-2">
+                        </div> -->
+                        <!-- <div class="row mt-2 mb-2">
                             <div class="col-4">
                                 <h6 class="m-0">Facebook</h6>
                             </div>
@@ -98,95 +159,134 @@
                                     <p class="text-right text-justify text-muted"><i class="fab fa-twitter"></i> /David Montores</p>
                                 </a>
                             </div>
-                        </div>
-                        <div class="row mt-2 mb-2">
+                        </div> -->
+                        <!-- <div class="row mt-2 mb-2">
                             <div class="col">
                                 <button class="btn"><i class="fas fa-edit mr-2"></i>Editar Bio</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+                <br>
             </div>
+           
             <div class="col-8 ml-5 bg-white">
                 <!-- ---------BUSCADOR--------- -->
                 <br>
                 <div class="row justify-content-center">
                     <div class="col-8">
-                        <form class="form-inline">
+                        <h3>Articulos Publicados Recientemente</h3>
+                        <!-- <form class="form-inline">
                             <input class="w-75 form-control ctm-border" type="text" placeholder="¿Qué quieres aprender de David?">
                             <button class="w-25 btn bg-ft-primary ctm-border" type="button"> 
                                     <i class="fas fa-search"></i>
-                                </button>
-                        </form>
+                            </button>
+                        </form> -->
                     </div>
                     <div class="col-1 d-flex">
-                        <button class="btn d-flex" type="button"> 
+                        <!-- <button class="btn d-flex" type="button"> 
                                     <i class="ml-2 mr-2 fas fa-sliders-h"></i>                
-                            </button>
+                        </button> -->
                     </div>
                 </div>
                 <br>
                 <hr>
-                <!-- ---------ARTICULOS--------- -->
-                <div class="row bg-white ml-2 mr-2 mt-4 sombras" *ngFor="let articulo of articulos">
-                    <div class="col">
-                        <div class="row mt-2">
-                            <div class="col-2">
-                                <a class="ctm-a" href="#">
-                                    <img class="ctm-img mt-4" src="assets/img/ex1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-9">
-                                <div class="row justify-content-center">
-                                    <a class="ctm-a" href="#">
-                                        <h3>Mejorar el aprendizaje</h3>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <a class="ctm-a" href="#">
-                                        <p class="foroteca-primary">TIC / área multimedia y comercio electrónico / Expresión Oral y Escrita / 2do Cuatrimestre</p>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="row">
-                                            <a class="ctm-a" href="">
-                                                <p class="text-muted">Prof. Margarita Mendoza Cruz</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="row justify-content-end">
-                                            <a class="ctm-a" href="">
-                                                <p class="text-muted">Hace 20 minutos</p>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <button class="btn bg-white" type="button"> 
-                                        <i class="foroteca-primary fas fa-angle-down"></i>
-                                    </button>
-                            </div>
+                
+                <div id="contenedorArticulos" >
+                    <div *ngIf="cargandoArticulo">
+                        <div class="text-center ">
+                            <h4>
+                                <i class="fas fa-circle-notch loadingItem"></i>
+                                Cargando Articulos...
+                            </h4>
                         </div>
-                        <div class="row">
-                            <div class="col bg-ft-primary">
-                                <div class="row mt-1 mb-1">
-                                    <div class="col-1">
-                                        <i class="fas fa-tag"></i>
-                                    </div>
-                                    <div class="col-11">
-                                        <a class="ctm-a" href="#">
-                                            <p class="ctm-p-m text-white">Aprendizaje. Expresión Oral, Multimedia. Conocimientos</p>
+                    </div>
+                    <div class="row sinArticulos m-4" *ngIf="vacioArticulo && !cargandoArticulo">
+                        <div class="col text-center ">
+                                <h4 class="text-muted">
+                                        Este usuario no tiene articulos
+                                </h4>
+                        </div> 
+                    </div>
+                <!-- ---------ARTICULOS--------- -->
+                    <div class="row bg-white ml-2 mr-2 mt-4 sombras" *ngFor="let articulo of articulos">
+                        <div class="col">
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <a class="ctm-a" href="">
+                                        <img class="ctm-img mt-4" src="{{ articulo.autor.picture }}">
+                                    </a>
+                                </div>
+                                <div class="col-9">
+                                    <div class="row justify-content-center">
+                                        <a class="ctm-a btn-link" href="#" [routerLink]="['/tema',articulo.idArticulo]">
+                                            <h3>{{ articulo.nombreArticulo }}</h3>
                                         </a>
                                     </div>
+                                    <div class="row">
+                                        <p class="ctm-a" href="#">
+                                            <span class="foroteca-primary">
+                                                {{ articulo.categoria.division }}/{{ articulo.categoria.carrera }}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                                <div class="row">
+                                                        <a class="ctm-a" href="">
+                                                            <p class="text-muted">
+                                                                <span class="badge badge-primary">
+                                                                        {{ articulo.autor.tipo | titlecase }} 
+                                                                </span>
+                                                                {{ articulo.autor.nombre }}
+                                                            </p>
+                                                        </a>
+                                                </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row justify-content-end">
+                                                <p class="ctm-a" href="">
+                                                        <span class="text-muted">
+                                                            {{ articulo.fechaPublicacion | timeago:'es'}}
+                                                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <!-- <button class="btn bg-white" type="button"> 
+                                            <i class="foroteca-primary fas fa-angle-down"></i>
+                                    </button> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col bg-ft-primary">
+                                        <div class="row mt-2 mb-1">
+                                            <div class="col-12">
+                                                
+                                                    <p class="ctm-p-m text-white">
+                                                        <i class="fas fa-tag mr-1"></i>
+                                                        <span *ngFor="let tag of articulo.tags; let itag = index;">
+                                                            <span *ngIf="itag != 0">
+                                                            ,
+                                                            </span>
+                                                            <a href="#color" class="link-foroteca">
+                                                                {{ tag.value }}
+                                                            </a>
+                                                        </span>
+                                                    </p>
+                                                
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br>
                 </div>
             </div>
         </div>
+        <br>
     </div>
 </div>

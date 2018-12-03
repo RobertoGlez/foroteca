@@ -4,7 +4,7 @@
 }
 
 .ctm-img-bg {
-    background-image: url('../../assets/img/usuario-wallpaper.jpg');
+    /* background-image: url('../../assets/img/usuario-wallpaper.jpg'); */
     background-size: cover;
     height: 500px;
 }

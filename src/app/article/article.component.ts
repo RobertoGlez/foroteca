@@ -145,6 +145,7 @@ export class ArticleComponent implements OnInit {
           nombreArticulo:form.value.titulo,
           tags: tags,
           autor:{
+            uid:this.auth.dataUser.uid,
             nombre:this.auth.dataUser.nombre + " " + this.auth.dataUser.apellidos,
             tipo:this.auth.dataUser.tipo,
             picture:this.getPicture(this.auth.dataUser)

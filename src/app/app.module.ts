@@ -38,7 +38,9 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import { UsuarioComponent } from './usuario/usuario.component';
 
 //Pipes
-import { TimeAgo } from './pipes/timeago.pipe'
+import { TimeAgo } from './pipes/timeago.pipe';
+import { DateFtPipe } from './pipes/date-ft.pipe';
+import { SearchComponent } from './search/search.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { TimeAgo } from './pipes/timeago.pipe'
     ThemeComponent,
     NopagefoundComponent,
     UsuarioComponent,
-    TimeAgo
+    TimeAgo,
+    DateFtPipe,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

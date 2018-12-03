@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <h3>
+            Resultados de {{ palabra }}
+        </h3>
+    </div>
+    <div class="col-12" *ngIf="!cargando">
+        <p>
+          <small class="text-muted">
+            Se encontraron {{ ResultadosNumber }} resultado<span *ngIf="ResultadosNumber > 1 || ResultadosNumber == 0">s</span>
+          </small>
+        </p>
+    </div>
+      
+  </div>
+  <hr>
+  <div class="cargando row">
+    <div class="col">
+      <div class="container">
+          <div class="row " *ngIf="cargando">
+              <div class="col">
+                  <div class="contenedor p-3 text-center text-muted" >
+                        <h4>
+                            <i class="fas fa-circle-notch loadingItem"></i> Cargando Resultados...
+                        </h4>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <h4 class=" text-muted" *ngIf="!cargando && sinResultados">
+        No se encontraron resultados
+      </h4>
+      <br>
+      <a href="" class="btn btn-link" routerLink="/inicio">Regresar a inicio</a>
+    </div>
+  </div>
+  <div class="articulos row" *ngIf="!cargando && !sinResultados">
+    <div class="col">
+      <div class="container">
+          <div class="row bg-white ml-2 mr-2 my-4  sombras" *ngFor="let articulo of articulos">
+              <div class="col">
+                  <div class="row mt-2">
+                      <div class="col-2 text-center">
+                          <a class="ctm-a" href="#">
+                              <img class="img-fluid ctm-img mt-2 p-1" [src]="articulo.autor.picture">
+                          </a>
+                      </div>
+                      <div class="col-9">
+                          <div class="row justify-content-center">
+                              <a class="ctm-a" [routerLink]="['/tema', articulo.idArticulo]">
+                                  <h3>{{ articulo.nombreArticulo }}</h3>
+                              </a>
+                          </div>
+                          <div class="row">
+                              <a class="ctm-a" href="#">
+                                  <p class="foroteca-primary">Division de {{ articulo.categoria.division }} / {{ articulo.categoria.carrera }}</p>
+                              </a>
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                                  <div class="row">
+                                      <a class="ctm-a" href="">
+                                          <p class="text-muted">
+                                              <span class="badge badge-primary">
+                                                      {{ articulo.autor.tipo | titlecase }} 
+                                              </span>
+                                              <!-- {{ articulo.autor.grado.abr }}. en {{ articulo.autor.carrera  }}   -->
+                                              {{ articulo.autor.nombre }}
+                                          </p>
+                                      </a>
+                                  </div>
+                              </div>
+                              <div class="col-6">
+                                  <div class="row justify-content-end">
+                                      <a class="ctm-a" href="">
+                                          <p class="text-muted">
+                                              {{ articulo.fechaPublicacion | timeago:'es'}}
+                                          </p>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-1">
+                          <!-- <button class="btn bg-white" type="button"> 
+                              <i class="foroteca-primary fas fa-angle-down"></i>
+                          </button> -->
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col bg-ft-primary">
+                          <div class="row mt-2 mb-1">
+                              <div class="col-12">
+                                  
+                                      <p class="ctm-p-m text-white">
+                                          <i class="fas fa-tag mr-1"></i>
+                                          <span *ngFor="let tag of articulo.tags; let itag = index;">
+                                              <span *ngIf="itag != 0">
+                                              ,
+                                              </span>
+                                              <a href="#color" class="link-foroteca">
+                                                 {{ tag.value }}
+                                              </a>
+                                          </span>
+                                      </p>
+                                 
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>

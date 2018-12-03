@@ -2,9 +2,9 @@
     <!-- ---------BUSCADOR--------- -->
     <div class="row">
         <div class="col-5">
-            <form class="form-inline">
-                <input class="w-75 form-control ctm-border" type="text" placeholder="¿Qué quieres saber?">
-                <button class="w-25 btn bg-ft-primary ctm-border" type="button"> 
+            <form class="form-inline" #busqueda="ngForm" (ngSubmit)="buscar(busqueda)" validate >
+                <input class="w-75 form-control ctm-border" required type="text" placeholder="¿Qué quieres saber?" name="palabra" ngModel>
+                <button class="w-25 btn bg-ft-primary ctm-border" type="submit" [disabled]="!busqueda.valid"> 
                     <i class="fas fa-search"></i>
                 </button>
             </form>
@@ -75,19 +75,19 @@
                         </div>
                         <div class="col-9">
                             <div class="row justify-content-center">
-                                <a class="ctm-a" [routerLink]="['/tema', articulo.idArticulo]">
+                                <span class="ctm-a" [routerLink]="['/tema', articulo.idArticulo]">
                                     <h3>{{ articulo.nombreArticulo }}</h3>
-                                </a>
+                                </span>
                             </div>
                             <div class="row">
-                                <a class="ctm-a" href="#">
+                                <span class="ctm-a" href="#">
                                     <p class="foroteca-primary">Division de {{ articulo.categoria.division }} / {{ articulo.categoria.carrera }}</p>
-                                </a>
+                                </span>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="row">
-                                        <a class="ctm-a" href="">
+                                        <a class="ctm-a" href="" [routerLink]="['/usuario', articulo.autor.uid]">
                                             <p class="text-muted">
                                                 <span class="badge badge-primary">
                                                         {{ articulo.autor.tipo | titlecase }} 
@@ -100,11 +100,11 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="row justify-content-end">
-                                        <a class="ctm-a" href="">
-                                            <p class="text-muted">
+                                        <p class="ctm-a" href="">
+                                            <span class="text-muted">
                                                 {{ articulo.fechaPublicacion | timeago:'es'}}
-                                            </p>
-                                        </a>
+                                            </span>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +167,7 @@
                 <div class="col">
                     <div class="row mt-3">
                         <div class="col">
-                            <a class="ctm-a" href="#">
+                            <a class="ctm-a" href="#" [routerLink]="['/usuario',usuario.uid]">
                                 <h5> {{ usuario.nombre }} {{ usuario.apellidos }} </h5>
                             </a>
                             <small>

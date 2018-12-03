@@ -125,7 +125,7 @@ export class AuthService {
     return new Promise( (resolve,reject)=>{
       firebase.auth().signInWithEmailAndPassword(email,pass).then(logueado=>{
         console.log("Usuario Reconocido",logueado.user.uid);
-        this.UpdateLastConecction();
+        this.UpdateLastConecction(logueado.user.uid);
         resolve(true);
       }).catch(err=>{
         reject(err);
@@ -177,9 +177,10 @@ export class AuthService {
     this.UserDocument = this.db.collection('usuarios').doc(newUser.uid);
     return this.UserDocument.update(newUser)
   }
-  public UpdateLastConecction(){
+  public UpdateLastConecction(uid:string){
     console.log('actualizando conexion');
     let newConecction = moment().format("YYYY-MM-DD HH:mm:ss");
+    this.UserDocument = this.db.collection<Usuario>('usuarios').doc(uid);
     this.UserDocument.update({
       fechaConexion:newConecction
     }).then(actualizado=>{

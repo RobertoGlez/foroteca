@@ -1,0 +1,46 @@
+.sombras {
+    box-shadow: 2px 2px 15px #666;
+}
+
+input::placeholder {
+    font-size: 23px;
+    opacity: 0.3;
+}
+
+.ctm-border {
+    border-radius: 0%;
+    border-width: 1px;
+    border-color: #00ad92;
+    border-style: solid;
+}
+
+.ctm-border-none:hover {
+    color: black !important;
+    background-color: white !important;
+}
+
+
+/* ------Custom Images------ */
+
+.ctm-img {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 100px;
+}
+
+.ctm-img2 {
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+}
+
+
+/* ------Custom Icons------ */
+
+.fa-angle-down {
+    font-size: 30px;
+}
+
+.fa-tag {
+    font-size: 20px;
+}

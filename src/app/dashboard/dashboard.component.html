@@ -173,7 +173,17 @@
                                     <div class="row">
                                         <div class="col-12">
                                                 <label for="">Descripción</label>
-                                                <textarea required class="form-control" name="descripcion" placeholder="Háblanos de ti..." [(ngModel)]="usuario.descripcion"></textarea>
+                                                <textarea maxlength="350" required class="form-control" name="descripcion" placeholder="Háblanos de ti..." [(ngModel)]="usuario.descripcion" ></textarea>
+                                                <p class="text-muted" *ngIf="usuario.descripcion">
+                                                    <small [ngClass]="{'text-danger' : usuario.descripcion.length > 350}">
+                                                        {{ usuario.descripcion.length }}/350
+                                                    </small>
+                                                </p>
+                                                <p class="text-muted" *ngIf="!usuario.descripcion">
+                                                        <small >
+                                                           0/350
+                                                        </small>
+                                                </p>
                                         </div>
                                     </div>
                                     <div class=" row">
